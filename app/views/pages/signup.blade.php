@@ -6,20 +6,23 @@
     <div id="signupform">
       <h3>Signup for mooody.co</h3>
       <form role="form">
-  <div class="form-group">
-    <label for="emailaddress">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-  </div>
-  <div class="form-group">
-    <label for="companyname">Company Name</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Company Name">
-  </div>
-  <button type="submit" class="btn btn-primary">Create Account</button>
-</form>
+      @include('layout.error')
+      {{ Form::open(array('url' => '/account/signup', 'method' => 'POST')) }}
+        <div class="form-group">
+          <label for="emailaddress">Email address</label>
+          {{ Form::email('email', Input::get('email'), array('class' => 'form-control', 'placeholder' => 'Enter Email'))}}
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          {{ Form::password('password', Input::get('password'), array('class' => 'form-control', 'placeholder' => 'Enter Password'))}}
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label for="companyname">Company Name</label>
+          {{ Form::text('company', Input::get('company'), array('class' => 'form-control', 'placeholder' => 'Enter Company'))}}
+        </div>
+        <button type="submit" class="btn btn-primary">Create Account</button>
+      {{ Form::close() }}
     </div>
   </div>
 </div>

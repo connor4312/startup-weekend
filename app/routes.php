@@ -19,8 +19,8 @@ Route::get('/', function()
 Route::get('/account/login', 'Controllers\LoginController@view');
 Route::post('/account/login', 'Controllers\LoginController@submit');
 
-Route::post('/account/register', 'Controllers\LoginController@regview');
-Route::get('/account/register', 'Controllers\LoginController@regsubmit');
+Route::post('/account/signup', 'Controllers\LoginController@regview');
+Route::get('/account/signup', 'Controllers\LoginController@regsubmit');
 
 Route::group(array('before' => 'auth'), function() {
 	Route::get('/board', 'Controllers\BoardController@index');

@@ -16,7 +16,7 @@ class LoginController extends \BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function view() {
-		return View::make('pages.signup');
+		return View::make('pages.login');
 	}
 
 	/**
@@ -24,7 +24,7 @@ class LoginController extends \BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function regview() {
-		return View::make('pages.register');
+		return View::make('pages.signup');
 	}
 
 	/**
