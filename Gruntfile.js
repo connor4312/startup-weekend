@@ -13,6 +13,9 @@ module.exports = function(grunt) {
           src: ['*.js'],
           dest: 'public/js/',
           ext: '.min.js',
+        },
+        {
+          "public/js/jquery.min.js": ["node_modules/jquery/lib/node-jquery.js"]
         }]
       }
     },
