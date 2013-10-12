@@ -9,7 +9,7 @@
       <span class="icon-bar"></span>
     </button>
     <div class="container-nav">
-    <a class="navbar-brand" href="#">Moody</a>
+    <a class="navbar-brand" href="#">mooody</a>
   
 
   <!-- Collect the nav links, forms, and other content for toggling -->
