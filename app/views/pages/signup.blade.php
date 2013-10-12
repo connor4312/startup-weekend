@@ -2,14 +2,6 @@
 @include('layout.nav')
 <div class="container">
 <div class="row">
-  <div class="col-lg-12">
-    <div id="hero">
-      <div class="hero-cont"><span class="hero-text">Your ideas and inspiration all in one place <br>  Create and share collages</span></div>
-    </div>
-  </div>
-
-</div>
-<div class="row">
   <div class="col-lg-6 col-lg-offset-3">
     <div id="signupform">
       <form role="form">
@@ -25,7 +17,7 @@
     <label for="companyname">Company Name</label>
     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Company Name">
   </div>
-  <button type="submit" class="btn btn-default">Create Account</button>
+  <button type="submit" class="btn btn-primary">Create Account</button>
 </form>
     </div>
   </div>
