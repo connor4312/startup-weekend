@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Validator;
 use Models\Board;
 use Models\Element;
 
+use Elements\Image;
+use Elements\Color;
+use Elements\Text;
+
 class ResourceController extends \BaseController {
 
 	public function __call($methods, $args) {
