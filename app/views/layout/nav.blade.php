@@ -10,7 +10,7 @@
     </button>
     <div class="container-nav">
     <a class="navbar-brand" href="#">Moody</a>
-  </div>
+  
 
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -19,6 +19,6 @@
     <ul class="nav navbar-nav navbar-right">
     </ul>
 </div>
+  </div>
   </div><!-- /.navbar-collapse -->
-</div>
 </nav>
