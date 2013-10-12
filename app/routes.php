@@ -23,10 +23,11 @@ Route::post('/account/register', 'Controllers\LoginController@regview');
 Route::get('/account/register', 'Controllers\LoginController@regsubmit');
 
 Route::group(array('before' => 'auth'), function() {
-	Route::get('')
+	Route::get('/board', 'Controllers\BoardController@index');
+	Route::get('/board/{id}', 'Controllers\BoardController@view');
+	Route::get('/board/new', 'Controllers\BoardController@new');
 });
 
-Route::get('/board/', 'Controllers\BoardController@index');
 
 Route::group(array('prefix' => '/api'), function() {
 
