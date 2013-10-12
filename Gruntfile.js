@@ -36,6 +36,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-exec');
 
+  grunt.registerTask('js', ['uglify']);
+  grunt.registerTask('css', ['less']);
   grunt.registerTask('default', ['less', 'uglify']);
 
 };
