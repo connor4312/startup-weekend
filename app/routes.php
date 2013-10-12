@@ -35,7 +35,7 @@ Route::group(array('prefix' => '/api'), function() {
 
 	$gencycle = function($resource) {
 		Route::get($resource, 'Controllers\ResourceController@' . $resource .'_index');
-		Route::post($resource . '/create', 'Controllers\ResourceController@' . $resource .'_create');
+		Route::post($resource, 'Controllers\ResourceController@' . $resource .'_create');
 		Route::get($resource . '/{id}', 'Controllers\ResourceController@' . $resource .'_get');
 		Route::post($resource . '/{id}/edit', 'Controllers\ResourceController@' . $resource .'_edit');
 		Route::delete($resource . '/{id}', 'Controllers\ResourceController@' . $resource .'_delete');
