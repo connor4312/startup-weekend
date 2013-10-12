@@ -10,9 +10,11 @@ class Image {
 		'yscale' => 'required|numeric'
 	);
 
-	public static $process = array(
-		'data' => function() {
-			return file_get_contents(Input::file('data')->getRealPath());
-		}
-	);
+	public function __construct() {
+		$this->process = array(
+			'data' => function() {
+				return file_get_contents(Input::file('data')->getRealPath());
+			}
+		);
+	}
 }

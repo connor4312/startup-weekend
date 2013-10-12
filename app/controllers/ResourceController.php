@@ -19,10 +19,12 @@ class ResourceController extends \BaseController {
 
 		$this->type = $resource;
 
-		$resource = ucwords($resource);
+		$resource = 'Elements\\' . ucwords($resource);
 
-		$this->fields = $resource::$fields;
-		$this->process = $resource::$process;
+		$mod = new $resource();
+
+		$this->fields = $mod->$fields;
+		$this->process = $mod->$process;
 		$this->redis = Redis::connection();
 
 		$response = array();
