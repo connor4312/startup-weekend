@@ -16,8 +16,8 @@
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav navbar-right">
       @if (Auth::guest())
-      <li>{{ HTML::link('/account/login', 'Login') }}</li>
-      <li>{{ HTML::link('/account/register', 'Register') }}</li>
+      <!-- <li>{{ HTML::link('/account/login', 'Login') }}</li> -->
+      <!-- <li>{{ HTML::link('/account/register', 'Register') }}</li> -->
       @else
       <li>{{ HTML::link('/board', 'My Boards') }}</li>
       <li>{{ HTML::link('/board/new', 'New Board') }}</li>
