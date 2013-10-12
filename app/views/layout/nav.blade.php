@@ -8,6 +8,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
+    <div class="container-nav"></div>
     <a class="navbar-brand" href="#">Moody</a>
   </div>
 
@@ -17,5 +18,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
     </ul>
+
   </div><!-- /.navbar-collapse -->
+</div>
 </nav>
