@@ -9,7 +9,7 @@ class BoardController extends \BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function index() {
-		return View::make('pages.board');
+		return View::make('pages.allboards');
 	}
 
 }
