@@ -15,7 +15,8 @@ module.exports = function(grunt) {
           ext: '.min.js',
         },
         {
-          "public/js/jquery.min.js": ["node_modules/jquery/lib/node-jquery.js"]
+          "public/js/jquery.min.js": ["node_modules/jquery/lib/node-jquery.js"],
+          "public/js/bootstrap.min.js": ["node_modules/twitter-bootstrap-3.0.0/dist/js/bootstrap.js"]
         }]
       }
     },
@@ -25,7 +26,7 @@ module.exports = function(grunt) {
           yuicompress: true
         },
         files: {
-          "public/css/style.css": "src/css/style.less",
+          "public/css/style.css": "src/css/styles.less",
         }
       }
     }
