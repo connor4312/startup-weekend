@@ -16,7 +16,17 @@ Route::get('/', function()
 	return View::make('pages.index');
 });
 
-Route::get('/mood', 'Controllers\BoardController@index');
+Route::get('/account/login', 'Controllers\LoginController@view');
+Route::post('/account/login', 'Controllers\LoginController@submit');
+
+Route::post('/account/register', 'Controllers\LoginController@regview');
+Route::get('/account/register', 'Controllers\LoginController@regsubmit');
+
+Route::group(array('before' => 'auth'), function() {
+	Route::get('')
+});
+
+Route::get('/board/', 'Controllers\BoardController@index');
 
 Route::group(array('prefix' => '/api'), function() {
 
