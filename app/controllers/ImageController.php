@@ -2,30 +2,32 @@
 
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use S3;
 
 class ImageController extends \BaseController {
 
 	private $types = array(
 		'dribbbleBucket' => array(
-			'action' => 'Repos\ImgDribbble@bucket'
+			'action' => 'Repos\ImgDribbble@bucket',
 			'validation' => array(
 				'url' => 'required|regex:^http:\/\/dribbble.com\/[A-z]+\/buckets\/.+$'
 			)
 		),
 		'dribbblePost' => array(
-			'action' => 'Repos\ImgDribbble@shot'
+			'action' => 'Repos\ImgDribbble@shot',
 			'validation' => array(
 				'url' => 'required|regex:^http:\/\/dribbble.com\/shots\/.+$'
 			)
 		),
 		'url' => array(
-			'action' => 'Repos\ImgURL@download'
+			'action' => 'Repos\ImgURL@download',
 			'validation' => array(
 				'url' => 'required|url'
 			)
 		),
 		'upload' => array(
-			'action' => 'Repos\ImgUpload@upload'
+			'action' => 'Repos\ImgUpload@upload',
 			'validation' => array(
 				'file' => 'mimes:jpg,png,bmp,gif'
 			)
@@ -52,8 +54,24 @@ class ImageController extends \BaseController {
 
 	}
 
-	private function awsUpload($path) {
+	private function awsUpload($input) {
+		if (!$input['success']) {
+			return array('success' => false, 'error' => $input['error']);
+		}
 
+		$id = DB::table('aws')
+			->insertGetId(array(
+				'board_id' => Input::get('board'),
+				'extension' => $input['extension'],
+				'created_at' => DB::raw('NOW()')
+			));
+
+		$name = 'upload' . $id . '.' . $input['extension'];
+
+		$s3 = new S3(Config::get('mooody.awsAccessKey'), Config::get('mooody.awsSecretKey'));
+		$s3->putObject(S3::inputFile($path, false), 'mooody', $name, S3::ACL_PUBLIC_READ);
+
+		return array('success' => true, 'url' => 'http://s3.amazonaws.com/mooody/' . $name);
 	}
 
 	private function checkBoard() {
