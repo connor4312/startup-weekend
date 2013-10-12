@@ -23,8 +23,8 @@ class ResourceController extends \BaseController {
 
 		$mod = new $resource();
 
-		$this->fields = $mod->$fields;
-		$this->process = $mod->$process;
+		$this->fields = $mod->fields;
+		$this->process = $mod->process;
 		$this->redis = Redis::connection();
 
 		$response = array();
