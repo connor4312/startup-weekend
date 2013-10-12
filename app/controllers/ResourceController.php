@@ -43,7 +43,7 @@ class ResourceController extends \BaseController {
 	}
 
 	private function checkBoard() {
-		if (!$this->board = Board::where('key', Input::get())->first()) {
+		if (!$this->board = Board::where('key', Input::get('board'))->first()) {
 			return false;
 		}
 		return true;
