@@ -13,7 +13,7 @@
 
 Route::get('/', function()
 {
-	return View::make('pages.board');
+	return View::make('pages.index');
 });
 
 Route::get('/mood', 'Controllers\BoardController@index');
