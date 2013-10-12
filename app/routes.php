@@ -19,8 +19,17 @@ Route::get('/', function()
 Route::get('/mood', 'Controllers\BoardController@index');
 
 Route::group(array('prefix' => '/api'), function() {
-	Route::resource('image', 'Controllers\ResourceController@image');
-	Route::resource('color', 'Controllers\ResourceController@color');
-	Route::resource('file', 'Controllers\ResourceController@file');
-	Route::resource('text', 'Controllers\ResourceController@text');
+
+	$gencycle = function($resource) {
+		Route::get($resource, 'Controllers\ResourceController@' . $resource .'_index');
+		Route::post($resource . '/create', 'Controllers\ResourceController@' . $resource .'_create');
+		Route::get($resource . '/{id}', 'Controllers\ResourceController@' . $resource .'_get');
+		Route::post($resource . '/{id}/edit', 'Controllers\ResourceController@' . $resource .'_edit');
+		Route::delete($resource . '/{id}', 'Controllers\ResourceController@' . $resource .'_delete');
+	};
+	$resources = array('image', 'color', 'file', 'text');
+
+	foreach ($resources as $r) {
+		$gencycle($r);
+	}
 });
