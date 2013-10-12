@@ -5,7 +5,6 @@
   <div class="col-lg-6 col-lg-offset-3">
     <div id="signupform">
       <h3>Signup for mooody.co</h3>
-      <form role="form">
       @include('layout.error')
       {{ Form::open(array('url' => '/account/signup', 'method' => 'POST')) }}
         <div class="form-group">
