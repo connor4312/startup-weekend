@@ -4,6 +4,7 @@
 <div class="row">
   <div class="col-lg-6 col-lg-offset-3">
     <div id="signupform">
+      <h3>Signup for mooody.co</h3>
       <form role="form">
   <div class="form-group">
     <label for="emailaddress">Email address</label>
