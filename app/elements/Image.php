@@ -1,5 +1,7 @@
 <?php namespace Elements;
 
+use Illuminate\Support\Facades\Input;
+
 class Image {
 	public $fields = array(
 		'url' => 'required_without:data|url',
