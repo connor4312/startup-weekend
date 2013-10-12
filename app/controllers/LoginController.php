@@ -39,11 +39,11 @@ class LoginController extends \BaseController {
 		));
 
 		if ($validator->fails()) {
-			return Redirect::to('/account/register')->withErrors($validator);
+			return Redirect::to('/account/signup')->withErrors($validator);
 		}
 
 		if (User::where('email', Input::get('email'))->count()) {
-			return Redirect::to('/account/register')->withErrors('That email has already been taken');
+			return Redirect::to('/account/signup')->withErrors('That email has already been taken');
 		}
 
 		$user = new User;
@@ -121,7 +121,7 @@ class LoginController extends \BaseController {
 	public function logout() {
 		Auth::logout();
 		Session::flush();
-		return Redirect::to($this->url('view'))->withErrors('success: Logged out.');
+		return Redirect::to('/account/login')->withErrors('success: Logged out.');
 	}
 
 }

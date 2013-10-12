@@ -19,6 +19,8 @@ Route::get('/', function()
 Route::get('/account/login', 'Controllers\LoginController@view');
 Route::post('/account/login', 'Controllers\LoginController@submit');
 
+Route::post('/account/logout', 'Controllers\LoginController@logout');
+
 Route::get('/account/signup', 'Controllers\LoginController@regview');
 Route::post('/account/signup', 'Controllers\LoginController@regsubmit');
 
