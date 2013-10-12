@@ -6,7 +6,8 @@
     "grunt-contrib-uglify" : "latest",
     "grunt-contrib-less" : "latest",
     "grunt-exec" : "latest",
-    "jquery" : "latest"
+    "jquery" : "latest",
+    "requirejs" : "latest"
   },
   "repository": {
     "type": "git",
