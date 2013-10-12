@@ -15,6 +15,7 @@ module.exports = function(grunt) {
           ext: '.min.js',
         },
         {
+          "public/js/require.min.js": ["node_modules/requirejs/require.js"],
           "public/js/jquery.min.js": ["node_modules/jquery/lib/node-jquery.js"],
           "public/js/bootstrap.min.js": ["node_modules/twitter-bootstrap-3.0.0/dist/js/bootstrap.js"]
         }]
