@@ -9,9 +9,8 @@ use Models\Element;
 
 class ResourceController extends \BaseController {
 
-	public function __call($callAction, $arguments) {
+	public function __call($methods, $args) {
 
-		list( , , $methods, $args) = $arguments;
 		list($resource, $method) = explode('_', $methods);
 
 		$this->type = $resource;
