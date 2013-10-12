@@ -59,6 +59,16 @@ class ImageController extends \BaseController {
 			return array('success' => false, 'error' => $input['error']);
 		}
 
+		$this->s3 = new S3(Config::get('mooody.awsAccessKey'), Config::get('mooody.awsSecretKey'));
+		
+		$paths = array();
+		foreach ($input as $in) {
+			$paths[] = $this->saveFile($in);
+		}
+		return array('success' => true, 'data' => $paths);
+	}
+
+	private function saveFile($file) {
 		$id = DB::table('aws')
 			->insertGetId(array(
 				'board_id' => Input::get('board'),
@@ -68,10 +78,9 @@ class ImageController extends \BaseController {
 
 		$name = 'upload' . $id . '.' . $input['extension'];
 
-		$s3 = new S3(Config::get('mooody.awsAccessKey'), Config::get('mooody.awsSecretKey'));
-		$s3->putObject(S3::inputFile($path, false), 'mooody', $name, S3::ACL_PUBLIC_READ);
+		$this->s3->putObject(S3::inputFile($path, false), 'mooody', $name, S3::ACL_PUBLIC_READ);
 
-		return array('success' => true, 'url' => 'http://s3.amazonaws.com/mooody/' . $name);
+		return 'http://s3.amazonaws.com/mooody/' . $name;
 	}
 
 	private function checkBoard() {
