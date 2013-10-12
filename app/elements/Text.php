@@ -6,9 +6,7 @@ class Text {
 		'font' => 'required',
 		'size' => 'required|numeric',
 		'x' => 'required|numeric',
-		'y' => 'required|numeric',
-		'xscale' => 'required|numeric',
-		'yscale' => 'required|numeric'
+		'y' => 'required|numeric'
 	);
 
 	public $process = array();
