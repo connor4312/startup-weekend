@@ -27,21 +27,22 @@ Route::group(array('before' => 'auth'), function() {
 	Route::get('/board', 'Controllers\BoardController@index');
 	Route::get('/board/{id}', 'Controllers\BoardController@view');
 	Route::get('/board/new', 'Controllers\BoardController@new');
-});
 
+	Route::group(array('prefix' => '/api'), function() {
 
-Route::group(array('prefix' => '/api'), function() {
+		$gencycle = function($resource) {
+			Route::get($resource, 'Controllers\ResourceController@' . $resource .'_index');
+			Route::post($resource, 'Controllers\ResourceController@' . $resource .'_create');
+			Route::get($resource . '/{id}', 'Controllers\ResourceController@' . $resource .'_get');
+			Route::post($resource . '/{id}/edit', 'Controllers\ResourceController@' . $resource .'_edit');
+			Route::delete($resource . '/{id}', 'Controllers\ResourceController@' . $resource .'_delete');
+		};
+		$resources = array('image', 'color', 'file', 'text');
 
-	$gencycle = function($resource) {
-		Route::get($resource, 'Controllers\ResourceController@' . $resource .'_index');
-		Route::post($resource, 'Controllers\ResourceController@' . $resource .'_create');
-		Route::get($resource . '/{id}', 'Controllers\ResourceController@' . $resource .'_get');
-		Route::post($resource . '/{id}/edit', 'Controllers\ResourceController@' . $resource .'_edit');
-		Route::delete($resource . '/{id}', 'Controllers\ResourceController@' . $resource .'_delete');
-	};
-	$resources = array('image', 'color', 'file', 'text');
+		foreach ($resources as $r) {
+			$gencycle($r);
+		}
 
-	foreach ($resources as $r) {
-		$gencycle($r);
-	}
+		Route::post('/image/upload', 'Controllers\ImageController@upload');
+	});
 });
