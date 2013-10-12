@@ -5,10 +5,15 @@ module.exports = function(grunt) {
       options: {
         banner: '/*! Built <%= grunt.template.today("dd-mm-yyyy") %> */\n'
       },
-      dist: {
-        files: {
-          'source': ['dest'],
-        }
+      production: {
+        files: [
+        {
+          expand: true,
+          cwd: 'src/public/js/',
+          src: ['*.js'],
+          dest: 'public/js/',
+          ext: '.min.js',
+        }]
       }
     },
     less: {
