@@ -23,4 +23,4 @@ Route::group(array('prefix' => '/api'), function() {
 	Route::resource('color', 'Controllers\Resource@color');
 	Route::resource('file', 'Controllers\Resource@file');
 	Route::resource('text', 'Controllers\Resource@text');
-})
+});
