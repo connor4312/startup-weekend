@@ -3,13 +3,13 @@ module.exports = function(grunt) {
   grunt.initConfig({
     uglify: {
       options: {
-        banner: '/*! Built <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+        banner: '/*! Built <%= grunt.template.today("dd-mm-yyyy") %> at #SWPNS */\n'
       },
       production: {
         files: [
         {
           expand: true,
-          cwd: 'src/public/js/',
+          cwd: 'src/js/',
           src: ['*.js'],
           dest: 'public/js/',
           ext: '.min.js',
