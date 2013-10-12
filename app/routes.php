@@ -19,8 +19,8 @@ Route::get('/', function()
 Route::get('/mood', 'Controllers\BoardController@index');
 
 Route::group(array('prefix' => '/api'), function() {
-	Route::resource('image', 'Controllers\Resource@image');
-	Route::resource('color', 'Controllers\Resource@color');
-	Route::resource('file', 'Controllers\Resource@file');
-	Route::resource('text', 'Controllers\Resource@text');
+	Route::resource('image', 'Controllers\ResourceController@image');
+	Route::resource('color', 'Controllers\ResourceController@color');
+	Route::resource('file', 'Controllers\ResourceController@file');
+	Route::resource('text', 'Controllers\ResourceController@text');
 });

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\View;
 
-class Controller extends \BaseController {
+class BoardController extends \BaseController {
 
 	/**
 	 * Shows the board view
