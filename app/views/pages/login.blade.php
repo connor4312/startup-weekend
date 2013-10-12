@@ -13,7 +13,7 @@
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            {{ Form::password('password', Input::get('password'), array('class' => 'form-control', 'placeholder' => 'Enter Password'))}}
+            {{ Form::password('password', array('class' => 'form-control', 'placeholder' => 'Enter Password'))}}
           </div>
           <button type="submit" class="btn btn-primary">Create Account</button>
         {{ Form::close() }}
