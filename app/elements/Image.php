@@ -1,7 +1,7 @@
 <?php namespace Elements;
 
 class Image {
-	public static $fields = array(
+	public $fields = array(
 		'url' => 'required_without:data|url',
 		'data' => 'required_without:url|image',
 		'x' => 'required|numeric',

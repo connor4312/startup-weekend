@@ -1,7 +1,7 @@
 <?php namespace Elements;
 
 class Text {
-	public static $fields = array(
+	public $fields = array(
 		'content' => 'required',
 		'font' => 'required',
 		'size' => 'required|numeric',
@@ -11,5 +11,5 @@ class Text {
 		'yscale' => 'required|numeric'
 	);
 
-	public static $process = array();
+	public $process = array();
 }
