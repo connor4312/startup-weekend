@@ -2,7 +2,7 @@
 
 class Color {
 	public $fields = array(
-		'color' => 'required|size:6',
+		'color' => 'required|between:5,12',
 		'x' => 'required|numeric',
 		'y' => 'required|numeric',
 		'xscale' => 'required|numeric',
