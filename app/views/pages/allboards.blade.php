@@ -14,13 +14,29 @@
   <!-- ####################### BOARD -->
   <div class="col-lg-11">
     <div id="all-boards">
-        <h1>Moody Logo</h1>
-        <h5>Created 10/12/13</h5>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="board">
+              <img src="img/board.png">
+              <div class="board-title">
+                <h4>Board Name</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="board">
+              <img src="img/board.png">
+              <div class="board-title">
+                <h4>Board Name</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="board">
+            </div>
+          </div>
+        </div>
       </div>
-    <div id="board">
-
-      Images goes here
-    </div>
   </div>
 
 </div>
