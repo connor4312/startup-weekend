@@ -1,6 +1,6 @@
 @if ($errs = $errors->all())
 		@if (count($errs) > 1)
-		<div class="alert danger">
+		<div class="alert alert-danger">
 			<ul>
 				@foreach ($errs as $message)
 					<li>{{ $message }}</li>
@@ -10,9 +10,9 @@
 		@else
 		<div class="alert
 		@if (preg_match('/^[a-z]+:/', $errs[0], $matches))
-		{{ trim($matches[0], ':') }}
+		alert-{{ trim($matches[0], ':') }}
 		@else
-		danger
+		alert-danger
 		@endif
 		">
 			{{ preg_replace('/^[a-z]+: ?/', '', $errs[0]) }}
