@@ -5,7 +5,7 @@
 
   <!-- ####################### BOARD -->
   <div class="col-lg-12">
-    <div id="all-boards">
+    <div id="allboards">
         <div class="row">
           <div class="col-lg-3">
             <div class="board">
@@ -24,7 +24,8 @@
             </div>
           </div>
           <div class="col-lg-3">
-            <div class="board">
+            <div class="createboard">
+              <p><i class="icon-plus icon-4x"></i></p>
             </div>
           </div>
         </div>
