@@ -11,7 +11,7 @@
 </div>
 <div class="row">
 <div class="col-lg-12">
-<div id="signup">
+
   <!-- Begin MailChimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
 <style type="text/css">
@@ -19,6 +19,7 @@
   /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
      We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
 </style>
+<div id="signup">
 <div id="mc_embed_signup">
 <form action="http://mooody.us7.list-manage.com/subscribe/post?u=4ed0cde0798bc57e7a6750e07&amp;id=db172c22c6" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
   <label for="mce-EMAIL"><h3>Signup and be notified of our beta release</h3></label><br>
