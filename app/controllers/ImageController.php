@@ -13,13 +13,13 @@ class ImageController extends \BaseController {
 		'dribbbleBucket' => array(
 			'action' => 'Repos\ImgDribbble@bucket',
 			'validation' => array(
-				'url' => 'required|regex:^http:\/\/dribbble.com\/[A-z]+\/buckets\/.+$'
+				'url' => 'required|regex:/^http:\/\/dribbble.com\/[A-z]+\/buckets\/.+$/'
 			)
 		),
 		'dribbblePost' => array(
 			'action' => 'Repos\ImgDribbble@shot',
 			'validation' => array(
-				'url' => 'required|regex:^http:\/\/dribbble.com\/shots\/.+$'
+				'url' => 'required|regex:/^http:\/\/dribbble.com\/shots\/.+$/'
 			)
 		),
 		'url' => array(
