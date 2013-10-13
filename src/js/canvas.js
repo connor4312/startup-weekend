@@ -249,7 +249,7 @@
 
 	$("#addColor").click(function () {
 		if (!colorPicker) {
-			colorPicker = Raphael.colorpicker(0, 0, 300, "#EEE");
+			colorPicker = Raphael.colorpicker(0, 0, $('#left-nav').innerWidth() - 1, "#EEE");
 			document.getElementById("pickerCanvas").appendChild(colorPicker.raphael.canvas);
 			colorPicker.onchange = onColorChange(colorPicker);
 			colorHex.val("#eee");
