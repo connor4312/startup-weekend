@@ -65,7 +65,7 @@ class ResourceController extends \BaseController {
 
 		$out = array();
 		foreach ($elems as $elem) {
-			$out[] = getData($elem->id);
+			$out[] = $this->getData($elem->id);
 		}
 
 		return array(
@@ -186,7 +186,7 @@ class ResourceController extends \BaseController {
 
 		$out = array();
 		foreach ($elems as $elem) {
-			$out[] = getData($elem->id);
+			$out[] = $this->getData($elem->id);
 		}
 
 		return array(
