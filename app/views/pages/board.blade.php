@@ -29,8 +29,8 @@
 
   <div id="act-buttons">
 <div class="btn-group">
-  <a class="btn btn-default" href="#"><i class="icon-chevron-up"></i></a>
-  <a class="btn btn-default" href="#"><i class="icon-chevron-down"></i></a>
+  <a class="btn btn-default" href="#"><i class="icon-chevron-up"></i> Bring Forward</a>
+  <a class="btn btn-default" href="#"><i class="icon-chevron-down"></i> Send Backwards</a>
 </div>
   </div>      
       <div id="canvas">
