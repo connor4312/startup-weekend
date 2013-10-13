@@ -5,8 +5,7 @@
     "twitter-bootstrap-3.0.0" : "latest",
     "grunt-contrib-uglify" : "latest",
     "grunt-contrib-less" : "latest",
-    "grunt-exec" : "latest",
-    "requirejs" : "latest"
+    "grunt-exec" : "latest"
   },
   "repository": {
     "type": "git",
