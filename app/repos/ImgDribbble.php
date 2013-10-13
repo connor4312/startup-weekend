@@ -28,7 +28,7 @@ class ImgDribbble {
 		$curl = new \Curl;
 		$data = $curl->simple_get(Input::get('url'));
 
-		preg_match('/dribbble\.s3\.amazonaws\.com\/users\/[0-9]+\/screenshots\/[0-9]+\/[0-9A-z_\-]+\.png/', $data, $matches);
+		preg_match_all('/dribbble\.s3\.amazonaws\.com\/users\/[0-9]+\/screenshots\/[0-9]+\/[0-9A-z_\-]+\.png/', $data, $matches);
 
 		$out = array();
 		foreach ($matches as $m) {
