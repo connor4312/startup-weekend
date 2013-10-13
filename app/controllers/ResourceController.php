@@ -82,13 +82,18 @@ class ResourceController extends \BaseController {
 			);
 			return $response;
 		}
-
+		if (!is_array(Input::get('elements'))) {
+			return array(
+				'success' => false,
+				'error' => 'Elements not given'
+			);
+		}
 		foreach (Input::get('elements') as $elem) {
 			$type = $elem['type'];
 			$ctype = 'Elements\\' . ucwords($type);
 
 			$class = new $ctype;
-			$validator = Validator::make(Input::all(), $class->fields);
+			$validator = Validator::make($elem, $class->fields);
 			if ($validator->fails()) {
 				return array('sucess' => false, 'error' => $validator->messages()->toArray());
 			}
