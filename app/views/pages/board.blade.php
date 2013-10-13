@@ -5,9 +5,9 @@
   <div class="col-lg-1">
     <div id="left-nav">
       <ul>
-        <li><a href="#"><img src="img/images.png"></a></li>
+        <li><a href="#"><img src="{{ URL::to('img/images.png') }}"></a></li>
         <hr>
-        <li><a href="#"><img src="img/color.png"></a></li>
+        <li><a href="#"><img src="{{ img/color.png }}"></a></li>
       </ul> 
     </div>
   </div>
