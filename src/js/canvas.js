@@ -208,7 +208,7 @@ $(function () {
 		var y = data.y || 200,
 			x = data.x || 200,
 			hext = data.color || colorHex.val(),
-			rectangle = paper.rect(x, y: 200, 200, 200);
+			rectangle = paper.rect(x, y, 200, 200);
 
 		rectangle.attr({
 			fill: hex,
