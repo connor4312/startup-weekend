@@ -27,7 +27,7 @@ $(function () {
 		var x = this.ox + dx,
 			y = this.oy + dy;
 
-		console.log("width: ", this.attr("width"), "height:", this.attr("height"));
+		console.log("width: ", this.attr("width"), "height:", this.attr("height"), dx, dy, x, y);
 
 		x = Math.min(width - this.attr("width") - 10, x);
 		x = Math.max(10, x);
