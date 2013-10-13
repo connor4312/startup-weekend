@@ -10,7 +10,7 @@ $(function () {
 		elements = [],
 		current = null,
 		dribbleUrl = $("#js-dribbble-bucket-in"),
-		pintrestUrl = $("#js-pin-in"),
+		pinterestUrl = $("#js-pin-in"),
 		key, i, colorPicker;
 
 	paper.canvas.style.backgroundColor = "#f2f2f2";
@@ -307,7 +307,7 @@ $(function () {
 
 	$("#js-pin-sub").click(function (event) {
 		event.preventDefault();
-		fetchImage(pintrestUrl.val());
+		fetchImage(pinterestUrl.val());
 	});
 
 	$.ajax({
