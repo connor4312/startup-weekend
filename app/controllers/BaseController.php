@@ -7,6 +7,7 @@ class BaseController extends Controller {
 	 *
 	 * @return void
 	 */
+
 	protected function setupLayout()
 	{
 		if ( ! is_null($this->layout))
@@ -15,7 +16,7 @@ class BaseController extends Controller {
 		}
 	}
 
-	private function pushBoards() {
+	protected function pushBoards() {
 		if (Auth::check()) {
 			Session::put('boards', Boards::where('user_id', Auth::user()->id));
 		} else {
