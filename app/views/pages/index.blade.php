@@ -4,7 +4,7 @@
 <div class="row">
   <div class="col-lg-12">
     <div id="hero">
-      <div class="hero-cont"><span class="hero-text">Your ideas and inspiration all in one place <br>  Create and share collages</span></div>
+      <div class="hero-cont"><span class="hero-text">Your ideas and inspiration all in one place &nbsp<br>  &nbspCreate and share collages</span></div>
     </div>
   </div>
 
