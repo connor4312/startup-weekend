@@ -8,7 +8,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <div class="container-nav">
+    <div class="container">
     <a class="navbar-brand" href="#">mooody</a>
   
 
