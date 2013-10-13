@@ -4,11 +4,12 @@ use Illuminate\Support\Facades\Input;
 
 class Image {
 	public $fields = array(
-		'url' => 'required:url|image',
+		'url' => 'required|url',
 		'x' => 'required|numeric',
 		'y' => 'required|numeric',
-		'xscale' => 'required|numeric',
-		'yscale' => 'required|numeric'
+		'index' => 'required|numeric',
+		'width' => 'required|numeric',
+		'height' => 'required|numeric'
 	);
 
 	public $process = array();
