@@ -29,8 +29,8 @@
 
   <div id="act-buttons">
 <div class="btn-group">
-  <a href="#" class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></span></a>
-  <a href="#" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></span></a>
+  <a class="btn btn-default" href="#"><i class="icon-chevron-up"></i></a>
+  <a class="btn btn-default" href="#"><i class="icon-chevron-down"></i></a>
 </div>
   </div>      
       <div id="canvas">
