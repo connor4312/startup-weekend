@@ -111,6 +111,8 @@
                 <a class="btn btn-default" href="#" id="moveForwardButton"><i class="icon-chevron-up"></i> Bring Forward</a>
                 <a class="btn btn-default" href="#" id="moveBackButton"><i class="icon-chevron-up"></i> Send Backwards</a>
             </div>
+            <a href="#" class="btn btn-primary pull-right" id="saveButton"><i class="icon-download-alt"></i> Save</a>
+            &nbsp;
             <div class="pull-right">
                 {{ Form::open(array('url' => '/board/' . $board->key . '/public', 'method' => 'POST', 'id' => 'privacy')) }}
                 <div class="btn-group" data-toggle="buttons">
@@ -123,7 +125,6 @@
                 </div>
                 {{ Form::close() }}
             </div>
-            <a href="#" class="btn btn-primary pull-right" id="saveButton"><i class="icon-download-alt"></i> Save</a>
         </div>
         <div id="canvas" data-key="{{ $board->key }}"></div>
     </div>
