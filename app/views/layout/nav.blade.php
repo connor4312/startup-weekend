@@ -19,9 +19,9 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Boards <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                @foreach 
-                <li><a href="#">Board #1</a></li>
-                <li><a href="#">Board #2</a></li>
+                @foreach (Session::get('boards') as $board)
+                  <li>{{ HTML::link('/board/' . $board->id, $board->name) }}</li>
+                @endforeach
               </ul>
             </li>
             <li><a href="#"><i class="icon-plus-sign"></i>Create New Board</a></li>

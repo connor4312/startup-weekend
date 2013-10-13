@@ -38,6 +38,8 @@ class BoardController extends \BaseController {
 		$board->name = Input::get('name');
 		$board->save();
 
+		$this->pushBoards();
+		
 		return Redirect::to('/board/' . $board->id);
 	}
 

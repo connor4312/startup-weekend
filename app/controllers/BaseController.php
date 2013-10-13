@@ -15,4 +15,13 @@ class BaseController extends Controller {
 		}
 	}
 
+	private function pushBoards() {
+		if (Auth::check()) {
+			Session::put('boards', Boards::where('user_id', Auth::user()->id));
+		} else {
+			Session::forget('boards');
+		}
+
+	}
+
 }

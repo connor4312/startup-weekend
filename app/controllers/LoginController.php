@@ -67,6 +67,7 @@ class LoginController extends \BaseController {
 			$messages[] = $this->lockedMessage();
 		} elseif (Auth::attempt(array('email' => Input::get('email'), 'password' => Input::get('password')))) {
 			Session::set('login.attempts', 0);
+			$this->pushBoards();
 			return Redirect::intended('/');
 		} else {
 			$messages[] = 'Invalid email or password.';
@@ -120,6 +121,7 @@ class LoginController extends \BaseController {
 	 */
 	public function logout() {
 		Auth::logout();
+		$this->pushBoards();
 		Session::flush();
 		return Redirect::to('/account/login')->withErrors('success: Logged out.');
 	}
