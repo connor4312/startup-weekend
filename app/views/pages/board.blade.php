@@ -38,7 +38,7 @@
                             <label for="exampleInputFile">Upload</label>
                             <input type="file" name="file" id="file">
                           </div>
-                          <input type="submit" name="submit" value="Submit" class="btn btn-default">
+                          <input type="submit" name="submit" value="Submit" class="btn btn-default" id="addImageButton">
                         </form>
                     </div>
                     <div class="modal-footer">

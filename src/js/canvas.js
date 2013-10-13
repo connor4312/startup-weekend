@@ -153,6 +153,7 @@
 		initializeElement(container);
 
 		$("#image").modal("hide");
+		$("#imageupload").modal("hide");
 		imageUrl.val("");
 	}
 
