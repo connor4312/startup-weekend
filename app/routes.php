@@ -33,7 +33,7 @@ Route::group(array('before' => 'auth'), function() {
 
 		Route::any('/image/upload', 'Controllers\ImageController@upload');
 		Route::get('/', 'Controllers\ResourceController@bulkGet');
-		Route::post('/', 'Controllers\ResourceController@bulkCreate');
+		Route::post('/', 'Controllers\ResourceController@bulkSave');
 
 		$gencycle = function($resource) {
 			Route::get($resource, 'Controllers\ResourceController@' . $resource .'_index');
