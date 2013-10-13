@@ -90,7 +90,7 @@ $(function () {
 			return;
 		}
 
-		moveCurrent(false)
+		moveCurrent(false);
 	}
 
 	function moveCurrentForward() {
@@ -143,7 +143,7 @@ $(function () {
 			data = [data];
 		}
 
-		for (image = data[i++]) {
+		while (image = data[i++]) {
 			container = paper.rect(image.x || 200, image.y || 200, image.width, image.height);
 
 			container.attr({
