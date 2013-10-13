@@ -90,9 +90,10 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<a data-toggle="modal" href="#image" class="btn btn-default btn-add"><i class="icon-tint"> Create a color swatch</i></a>
 </div> 
 
-<a data-toggle="modal" href="#image" class="btn btn-default btn-add"><i class="icon-tint"> Create a color swatch</i></a>
+
  
   <!-- ####################### BOARD -->
   <div id="board" class="pull-left">
