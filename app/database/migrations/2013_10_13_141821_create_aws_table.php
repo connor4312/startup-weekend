@@ -12,7 +12,7 @@ class CreateAwsTable extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('users', function(Blueprint $table) {
+        Schema::create('aws', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('board_id');
             $table->string('extension', 5);
@@ -27,7 +27,7 @@ class CreateAwsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('users');
+		Schema::drop('aws');
 	}
 
 }
