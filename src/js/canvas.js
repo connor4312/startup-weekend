@@ -300,7 +300,7 @@ $(function () {
 
 	$("#imageUpload").ajaxForm(addImage);
 	$("#imageUploadButton").click(function () {
-		$(this).attr("disabled", true);;
+		setTimeout($(this).attr("disabled", true), 100);
 	});
 
 	$("#addColor").click(function (event) {
