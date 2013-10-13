@@ -85,7 +85,7 @@
         <div id="act-buttons">
             <div class="btn-group">
                 <a class="btn btn-default" href="#">Bring Forward</a> <a class="btn btn-default" href="#"> Send Backwards</a>
-                {{ Form::open(url('/board/' . $board->key . '/public', 'method' => 'POST')) }}
+                {{ Form::open(array('url' => '/board/' . $board->key . '/public', 'method' => 'POST')) }}
                 <input type="checkbox" value="1" id="privacybtn">
                 {{ Form::close() }}
             </div>
