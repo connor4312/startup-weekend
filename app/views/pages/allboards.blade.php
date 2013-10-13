@@ -1,5 +1,6 @@
 @include('layout.head')
 @include('layout.nav')
+<div class="container">
 <div class="row">
   <!-- ###################### LEFT NAVIGATION -->
 
@@ -24,7 +25,7 @@
             </div>
           </div>
           <div class="col-lg-3">
-            <div class="createboard">
+            <div class="newboard">
               <p><i class="icon-plus icon-4x"></i></p>
             </div>
           </div>
@@ -32,5 +33,6 @@
       </div>
   </div>
 
+</div>
 </div>
 @include('layout.foot')
