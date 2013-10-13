@@ -26,7 +26,7 @@ Route::post('/account/signup', 'Controllers\LoginController@regsubmit');
 Route::group(array('before' => 'auth'), function() {
 	Route::get('/board', 'Controllers\BoardController@index');
 	Route::get('/board/{id}', 'Controllers\BoardController@view');
-	Route::get('/board/new', 'Controllers\BoardController@new');
+	Route::get('/board/new', 'Controllers\BoardController@addnew');
 
 	Route::group(array('prefix' => '/api'), function() {
 
