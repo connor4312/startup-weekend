@@ -24,7 +24,7 @@
                 @else
                   <?php $boards = Session::get('boards') ?>
                   @foreach ($boards as $board)
-                    <li>{{ HTML::link('/board/' . $board->id, $board->name) }}</li>
+                    <li>{{ HTML::link('/board/' . $board->key, $board->name) }}</li>
                   @endforeach
                 @endif
               </ul>
