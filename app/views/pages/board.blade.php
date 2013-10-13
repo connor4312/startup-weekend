@@ -6,15 +6,25 @@
     <div id="left-nav" class="pull-left">
       <div class="addimage">
         <div class="addimage-inside">
-          <img src="{{ URL::to('img/images.png') }}">
-          Upload or Paste Images
+          <i class="icon-picture"> Paste image URL</i>
         </div>
       </div>
 
       <div class="addimage">
         <div class="addimage-inside">
-          <img src="{{ URL::to('img/color.png') }}">
-          Create a color swatch
+          <i class="icon-tint"> Create a color swatch</i>
+        </div>
+      </div>
+
+      <div class="addimage">
+        <div class="addimage-inside">
+          <i class="icon-dribbble"> Paste dribbble URL</i>
+        </div>
+      </div>
+
+      <div class="addimage">
+        <div class="addimage-inside">
+          <i class="icon-pinterest"> Paste Pinterest URL</i>
         </div>
       </div>
     </div>
