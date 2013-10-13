@@ -88,8 +88,8 @@
   <!-- ####################### BOARD -->
   <div id="board" class="pull-left">
       <div id="board-title" class="pull-left">
-          <h1>Moody Logo</h1>
-          <h5>Created 10/12/13</h5>
+          <h1>{{ $board->name }}</h1>
+          <h5>Created {{ Carbon::createFromTimeStamp(strtotime($backup->created_at))->diffForHumans() }}</h5>
         </div>
   <div class="clearfix"></div>
 
@@ -100,7 +100,7 @@
 </div>
 <a class="btn btn-default"href="#"><i class="icon-share-alt"></i> Share your board</a>
   </div>
-      <div id="canvas">
+      <div id="canvas" data-key="{{ $board->key }}">
       </div>
     </div>
 
