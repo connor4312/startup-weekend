@@ -37,7 +37,7 @@
                           <div class="form-group">
                             <label for="exampleInputFile">Upload</label>
                             <input type="file" name="file" id="file">
-                            <input type="hidden" value="upload">
+                            <input type="hidden" name="type" value="upload">
                             <input type="hidden" name="board" value="{{ $board->key }}">
                           </div>
                           <input type="submit" name="submit" value="Submit" class="btn btn-default">
