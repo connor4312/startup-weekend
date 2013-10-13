@@ -23,8 +23,8 @@ class ImageController extends \BaseController {
 				'url' => 'required|url'
 			)
 		),
-		'pintrest' => array(
-			'action' => 'Repos\ImgRemote@pintrest',
+		'pinterest' => array(
+			'action' => 'Repos\ImgRemote@pinterest',
 			'validation' => array(
 				'url' => 'required|url'
 			)

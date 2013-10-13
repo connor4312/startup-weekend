@@ -58,7 +58,7 @@ class ImgRemote {
 		return array('success' => true, 'data' => $out);
 	}
 
-	public static function pintrest() {
+	public static function pinterest() {
 		if (!preg_match('/pinterest\.com\/[A-z0-9_\-]+\/[A-z0-9_\-]+/', Input::get('url'))) {
 			return array('success' => false, 'error' => 'Bad URL');
 		}
