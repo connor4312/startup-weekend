@@ -60,12 +60,12 @@ class ResourceController extends \BaseController {
 		}
 
 		$elems = Element::where('board_id', $this->board->id)
-			->select('id')
+			->select('id', 'type')
 			->get();
 
 		$out = array();
 		foreach ($elems as $elem) {
-			$out[] = $this->getData($elem->id);
+			$out[] = $this->getData($elem->id) + array('type' => $elem->type);
 		}
 
 		return array(
