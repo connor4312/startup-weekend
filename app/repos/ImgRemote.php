@@ -2,7 +2,25 @@
 
 use Illuminate\Support\Facades\Input;
 
-class ImgDribbble {
+class ImgRemote {
+
+	private static $allowedTypes = array(
+		'image/png',
+		'image/gif',
+		'image/jpg',
+		'image/jpeg',
+		'image/bmp',
+	);
+
+	public static function download() {
+		$file = self::grabFile(Input::get('url'));
+
+		if (!in_array($file['type'], self::$allowedTypes)) {
+			return array('success' => false, 'data' => 'Not a valid image');
+		}
+
+		return array('success' => 'true', 'data' => array($file['path']));
+	}
 
 	public static function shot() {
 		preg_match('/[0-9]+|-[A-z]+$/', Input::get('url'), $matches);
@@ -17,7 +35,7 @@ class ImgDribbble {
 			return array('success' => false, 'Could not find shot');
 		}
 
-		return array('success' => true, 'data' => array(self::grabFile($data->image_url)));
+		return array('success' => true, 'data' => array(self::grabFile($data->image_url)['path']));
 	}
 
 	public static function bucket() {
@@ -32,7 +50,7 @@ class ImgDribbble {
 
 		$out = array();
 		foreach ($matches[0] as $m) {
-			$out[] = self::grabFile('http://' . $m);
+			$out[] = self::grabFile('http://' . $m)['path'];
 		}
 		return array('success' => true, 'data' => $out);
 	}
@@ -47,10 +65,11 @@ class ImgDribbble {
 		curl_setopt($ch, CURLOPT_FILE, $fp);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 		curl_exec($ch);
+		$mime = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
 		curl_close($ch);
 		fclose($fp);
 
-		return $path;
+		return compact('path', 'mime');
 	}
 
 }

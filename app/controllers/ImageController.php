@@ -12,19 +12,19 @@ class ImageController extends \BaseController {
 
 	private $types = array(
 		'dribbbleBucket' => array(
-			'action' => 'Repos\ImgDribbble@bucket',
+			'action' => 'Repos\ImgRemote@bucket',
 			'validation' => array(
 				'url' => 'required|regex:/^http:\/\/dribbble.com\/[A-z]+\/buckets\/.+$/'
 			)
 		),
 		'dribbblePost' => array(
-			'action' => 'Repos\ImgDribbble@shot',
+			'action' => 'Repos\ImgRemote@shot',
 			'validation' => array(
 				'url' => 'required|regex:/^http:\/\/dribbble.com\/shots\/.+$/'
 			)
 		),
 		'url' => array(
-			'action' => 'Repos\ImgURL@download',
+			'action' => 'Repos\ImgRemote@download',
 			'validation' => array(
 				'url' => 'required|url'
 			)
