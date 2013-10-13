@@ -40,11 +40,8 @@
                             <input type="hidden" name="type" value="upload">
                             <input type="hidden" name="board" value="{{ $board->key }}">
                           </div>
-                          <input type="submit" name="submit" value="Submit" class="btn btn-default">
+                          <input type="submit" name="submit" value="Submit" class="btn btn-default" id="imageUploadButton">
                         </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> <button type="button" class="btn btn-primary" id="addImageButton">Add Image to Board</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -113,17 +110,17 @@
             <div class="btn-group">
                 <a class="btn btn-default" href="#" id="moveForwardButton"><i class="icon-chevron-up"></i> Bring Forward</a>
                 <a class="btn btn-default" href="#" id="moveBackButton"><i class="icon-chevron-up"></i> Send Backwards</a>
-                {{ Form::open(array('url' => '/board/' . $board->key . '/public', 'method' => 'POST', 'id' => 'privacy')) }}
-                <div class="btn-group" data-toggle="buttons">
-                  <label class="btn btn-default">
-                    <input type="radio" name="public" value="1"> Private
-                  </label>
-                  <label class="btn btn-default">
-                    <input type="radio" name="private" value="2"> Public
-                  </label>
-                </div>
-                {{ Form::close() }}
             </div>
+            {{ Form::open(array('url' => '/board/' . $board->key . '/public', 'method' => 'POST', 'id' => 'privacy')) }}
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-default">
+                {{ Form::radio('public', '0', $board->public ? true : false) }} Private
+              </label>
+              <label class="btn btn-default">
+                {{ Form::radio('public', '1', !$board->public ? true : false) }} Public
+              </label>
+            </div>
+            {{ Form::close() }}
             <a href="#" class="btn btn-primary pull-right" id="saveButton"><i class="icon-download-alt"></i> Save</a>
         </div>
         <div id="canvas" data-key="{{ $board->key }}"></div>
