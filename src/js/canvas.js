@@ -135,25 +135,36 @@ $(function () {
 	}
 
 	function addImage(response) {
-		var data = response.data ? response.data[0] : response,
-			container = paper.rect(data.x || 200, data.y || 200, data.width, data.height);
+		var data = response.data || response,
+			i = 0,
+			image, container;
 
-		container.attr({
-			cursor: "move",
-			stroke: "#FFF",
-			"stroke-width": 10,
-			fill: "url(" + unescape(data.url) + ")"
-		});
+		if (Object.prototype.toString.call(data) !== "[object Array]") {
+			data = [data];
+		}
 
-		container._type = "image";
-		container._width = data.width;
-		container._height = data.height;
-		container._url = data.url;
+		for (image = data[i++]) {
+			container = paper.rect(image.x || 200, image.y || 200, image.width, image.height);
 
-		initializeElement(container);
+			container.attr({
+				cursor: "move",
+				stroke: "#FFF",
+				"stroke-width": 10,
+				fill: "url(" + unescape(image.url) + ")"
+			});
+
+			container._type = "image";
+			container._width = image.width;
+			container._height = image.height;
+			container._url = image.url;
+
+			initializeElement(container);
+		}
 
 		$("#image").modal("hide");
 		$("#imageupload").modal("hide");
+		$("#dribbble").modal("hide");
+		$("#pinterest").modal("hide");
 		imageUrl.val("");
 	}
 
