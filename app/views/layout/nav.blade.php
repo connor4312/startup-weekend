@@ -28,7 +28,7 @@
                 @endif
               </ul>
             </li>
-            <li><a href="#"><i class="icon-plus-sign"></i>Create New Board</a></li>
+            <li><a href="#"><i class="icon-plus-sign"></i> Create New Board</a></li>
           </ul>
           @else
           <ul class="nav navbar-nav navbar-right">
