@@ -106,21 +106,23 @@
             </h5>
         </div>
         <div class="clearfix"></div>
-        <div id="act-buttons">
+        <div id="act-buttons" class="row">
             <div class="btn-group">
                 <a class="btn btn-default" href="#" id="moveForwardButton"><i class="icon-chevron-up"></i> Bring Forward</a>
                 <a class="btn btn-default" href="#" id="moveBackButton"><i class="icon-chevron-up"></i> Send Backwards</a>
             </div>
-            {{ Form::open(array('url' => '/board/' . $board->key . '/public', 'method' => 'POST', 'id' => 'privacy')) }}
-            <div class="btn-group" data-toggle="buttons">
-              <label class="btn btn-default">
-                {{ Form::radio('public', '0', $board->public ? true : false) }} Private
-              </label>
-              <label class="btn btn-default">
-                {{ Form::radio('public', '1', !$board->public ? true : false) }} Public
-              </label>
+            <div class="pull-right">
+                {{ Form::open(array('url' => '/board/' . $board->key . '/public', 'method' => 'POST', 'id' => 'privacy')) }}
+                <div class="btn-group" data-toggle="buttons">
+                  <label class="btn btn-default">
+                    {{ Form::radio('public', '0', $board->public ? true : false) }} Private
+                  </label>
+                  <label class="btn btn-default">
+                    {{ Form::radio('public', '1', !$board->public ? true : false) }} Public
+                  </label>
+                </div>
+                {{ Form::close() }}
             </div>
-            {{ Form::close() }}
             <a href="#" class="btn btn-primary pull-right" id="saveButton"><i class="icon-download-alt"></i> Save</a>
         </div>
         <div id="canvas" data-key="{{ $board->key }}"></div>
