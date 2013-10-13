@@ -15,8 +15,8 @@ class ImgRemote {
 	public static function download() {
 		$file = self::grabFile(Input::get('url'));
 
-		if (!in_array($file['type'], self::$allowedTypes)) {
-			return array('success' => false, 'data' => 'Not a valid image');
+		if (!in_array($file['mime'], self::$allowedTypes)) {
+			return array('success' => false, 'data' => 'Not a valid image, ' . $file['mime']);
 		}
 
 		return array('success' => 'true', 'data' => array($file['path']));
