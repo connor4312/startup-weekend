@@ -34,7 +34,7 @@
           </div>
           <div class="col-lg-3">
             <div class="newboard">
-              <p><i class="icon-plus icon-4x"></i></p>
+              <img src="img/create.png">
               <div class="board-title">
                 <h4>Create board</h4>
               </div>
