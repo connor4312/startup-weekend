@@ -91,7 +91,7 @@ class ImageController extends \BaseController {
 
 		$this->s3->putObject(S3::inputFile($file, false), 'mooody', $name, S3::ACL_PUBLIC_READ);
 
-		unlink($path);
+		unlink($file);
 
 		return 'http://s3.amazonaws.com/mooody/' . $name;
 	}
