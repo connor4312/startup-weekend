@@ -30,6 +30,8 @@ Route::group(array('before' => 'auth'), function() {
 
 	Route::group(array('prefix' => '/api'), function() {
 
+		Route::any('/image/upload', 'Controllers\ImageController@upload');
+		
 		$gencycle = function($resource) {
 			Route::get($resource, 'Controllers\ResourceController@' . $resource .'_index');
 			Route::post($resource, 'Controllers\ResourceController@' . $resource .'_create');
@@ -43,6 +45,5 @@ Route::group(array('before' => 'auth'), function() {
 			$gencycle($r);
 		}
 
-		Route::any('/image/upload', 'Controllers\ImageController@upload');
 	});
 });

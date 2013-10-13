@@ -11,5 +11,5 @@ class Image {
 		'yscale' => 'required|numeric'
 	);
 
-	public $this->process = array();
+	public $process = array();
 }
