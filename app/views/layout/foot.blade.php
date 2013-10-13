@@ -1,4 +1,5 @@
 </div>
+<div class="clearfix"></div>
     <div id="footer">
       <div class="container">
         <div class="col-md-6">

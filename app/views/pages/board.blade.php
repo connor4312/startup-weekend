@@ -1,8 +1,16 @@
 @include('layout.head')
 @include('layout.nav')
 <div class="container-board">
-    <!-- ###################### LEFT NAVIGATION -->
     <div id="left-nav" class="pull-left">
+        <div id="board-title" class="pull-left">
+            <h1>
+                {{ $board->name }}
+            </h1>
+            <h5>
+                Created {{ Carbon\Carbon::createFromTimeStamp(strtotime($board->created_at))->diffForHumans() }}
+            </h5>
+        </div>
+        <div class="clearfix"></div>
         <a data-toggle="modal" href="#image" class="btn btn-default btn-add"><i class="icon-picture"></i> Paste image URL</a>
         <div class="modal fade" id="image" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -101,15 +109,6 @@
         </div>
     </div><!-- ####################### BOARD -->
     <div id="board" class="pull-left">
-        <div id="board-title" class="pull-left">
-            <h1>
-                {{ $board->name }}
-            </h1>
-            <h5>
-                Created {{ Carbon\Carbon::createFromTimeStamp(strtotime($board->created_at))->diffForHumans() }}
-            </h5>
-        </div>
-        <div class="clearfix"></div>
         <div id="act-buttons" class="row">
             <div class="btn-group">
                 <a class="btn btn-default" href="#" id="moveForwardButton"><i class="icon-chevron-up"></i> Bring Forward</a>
