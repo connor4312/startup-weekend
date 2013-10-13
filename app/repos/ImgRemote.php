@@ -70,6 +70,9 @@ class ImgRemote {
 
 		$out = array();
 		foreach ($matches[0] as $m) {
+			if (preg_match('/_teaser\.[a-z]{3}$/', $m)) {
+				continue;
+			}
 			$out[] = self::grabFile('http://' . $m)['path'];
 		}
 		return array('success' => true, 'data' => $out);
