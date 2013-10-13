@@ -43,6 +43,6 @@ Route::group(array('before' => 'auth'), function() {
 			$gencycle($r);
 		}
 
-		Route::post('/image/upload', 'Controllers\ImageController@upload');
+		Route::any('/image/upload', 'Controllers\ImageController@upload');
 	});
 });

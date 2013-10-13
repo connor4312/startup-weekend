@@ -58,11 +58,14 @@ class ImageController extends \BaseController {
 		if (!$input['success']) {
 			return array('success' => false, 'error' => $input['error']);
 		}
-
+		
 		$this->s3 = new S3(Config::get('mooody.awsAccessKey'), Config::get('mooody.awsSecretKey'));
 
 		$paths = array();
 		foreach ($input as $in) {
+			if (!$in) {
+				continue;
+			}
 			$paths[] = $this->saveFile($in);
 		}
 		return array('success' => true, 'data' => $paths);
