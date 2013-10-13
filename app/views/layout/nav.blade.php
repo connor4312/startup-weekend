@@ -14,24 +14,23 @@
       <a class="navbar-brand" href="#">mooody</a>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
-          @else
+          @if (Auth::check())
           <ul class="nav navbar-nav">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Boards <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Board #1</a></li>
-          <li><a href="#">Board #2</a></li>
-        </ul>
-      </li>
-      <li><a href="#"><i class="icon-plus-sign"></i>Create New Board</a></li>
-    </ul>
-    @endif
-          <ul class="nav navbar-nav navbar-right">
-            @if (Auth::guest())
-            <!-- <li>{{ HTML::link('/account/login', 'Login') }}</li> -->
-            <!-- <li>{{ HTML::link('/account/register', 'Register') }}</li> -->
-            
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Boards <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Board #1</a></li>
+                <li><a href="#">Board #2</a></li>
+              </ul>
+            </li>
+            <li><a href="#"><i class="icon-plus-sign"></i>Create New Board</a></li>
           </ul>
+          @else
+          <ul class="nav navbar-nav navbar-right">
+            <li>{{ HTML::link('/account/login', 'Login') }}</li>
+            <li>{{ HTML::link('/account/register', 'Register') }}</li>
+          </ul>
+          @endif
         </div>
       </div>
     </div>
