@@ -6,6 +6,7 @@
 		colorHex = $("#colorHex"),
 		imageUrl = $("#imageUrl"),
 		pickerContainer = $("#pickerContainer"),
+		pickerCanvas = $("#pickerCanvas"),
 		elements = [],
 		current = null,
 		key, i, colorPicker;
@@ -211,13 +212,15 @@
 		initializeElement(rectangle);
 
 		pickerContainer.hide();
-		colorPicker.color("#EEE");
+		colorPicker.color("#eee");
 		colorHex.css({
 			background: "#FFF",
 			color: "#000"
 		});
-		colorHex.val("");
+		colorHex.val("#eee");
 	}
+
+	pickerContainer.hide();
 
 	$("#addColorButton").click(addColor);
 
@@ -249,9 +252,9 @@
 
 	$("#addColor").click(function () {
 		if (!colorPicker) {
-			colorPicker = Raphael.colorpicker(0, 0, $('#left-nav').innerWidth() - 1, "#EEE");
-			document.getElementById("pickerCanvas").appendChild(colorPicker.raphael.canvas);
+			colorPicker = Raphael.colorpicker(0, 0, $('#left-nav').innerWidth() - 1*, "#EEE", document.getElementById("pickerCanvas"));
 			colorPicker.onchange = onColorChange(colorPicker);
+			colorPicker.color("#eee");
 			colorHex.val("#eee");
 		}
 		pickerContainer.show();
@@ -264,4 +267,6 @@
 			colorWheel.color(colorHex.val());
 		}
 	});
+
+	$("#saveButton").click(save);
 }(jQuery, Raphael));
