@@ -41,7 +41,6 @@
                                 <input type="hidden" name="type" value="upload">
                                 <input type="hidden" name="board" value="{{ $board->key }}">
                               </div>
-                            </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
