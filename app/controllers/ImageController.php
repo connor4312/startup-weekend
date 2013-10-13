@@ -90,10 +90,15 @@ class ImageController extends \BaseController {
 		$name = 'upload' . $id . '.' . $extension;
 
 		$this->s3->putObject(S3::inputFile($file, false), 'mooody', $name, S3::ACL_PUBLIC_READ);
+		$size = getimagesize($file);
 
 		unlink($file);
 
-		return 'http://s3.amazonaws.com/mooody/' . $name;
+		return array(
+			'url' => 'http://s3.amazonaws.com/mooody/' . $name,
+			'width' => $size[0],
+			'height' => $size[1]
+		);
 	}
 
 	private function checkBoard() {
