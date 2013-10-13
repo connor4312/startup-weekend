@@ -254,6 +254,7 @@
 
 	$("#imageUpload").on("submit", function (event) {
 		event.preventDefault();
+		console.log('asdf');
 		$(this).ajaxForm({
 			url: "/api/image/upload?board=" + key + "&type=upload",
 			method: "POST",
