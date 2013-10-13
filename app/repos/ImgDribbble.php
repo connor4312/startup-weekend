@@ -7,22 +7,22 @@ class ImgDribbble {
 	public static function shot() {
 		preg_match('/[0-9]+|-[A-z]+$/', Input::get('url'), $matches);
 		if (!array_key_exists(0, $matches)) {
-			return false;
+			return array('success' => false, 'error' => 'Bad URL');
 		}
 
 		$curl = new \Curl;
 		$data = json_decode($curl->simple_get('http://api.dribbble.com/shots/' . $matches[0]));
 
 		if (!isset($data->image_url)) {
-			return false;
+			return array('success' => false, 'Could not find shot');
 		}
 
-		return self::grabFile($data->image_url);
+		return array('success' => true, 'data' => self::grabFile($data->image_url));
 	}
 
 	public static function bucket() {
 		if (!preg_match('/\/\/dribbble.com\/[A-z_\-]+\/buckets\/[0-9A-z_\-]+/', Input::get('url'))) {
-			return false;
+			return array('success' => false, 'error' => 'Bad URL');
 		}
 
 		$curl = new \Curl;
@@ -34,7 +34,7 @@ class ImgDribbble {
 		foreach ($matches[0] as $m) {
 			$out[] = self::grabFile('http://' . $m);
 		}
-		return $out;
+		return array('success' => true, 'data' => $out);
 	}
 
 	private static function grabFile($url) {
