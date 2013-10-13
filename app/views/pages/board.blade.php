@@ -3,7 +3,7 @@
 <div class="container">
   <!-- ###################### LEFT NAVIGATION -->
   
-    <div id="left-nav pull-left">
+    <div id="left-nav" class="pull-left">
       <div class="addimage">
         <div class="addimage-inside">
           <img src="{{ URL::to('img/images.png') }}">
