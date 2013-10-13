@@ -31,7 +31,7 @@ class ImgDribbble {
 		preg_match_all('/dribbble\.s3\.amazonaws\.com\/users\/[0-9]+\/screenshots\/[0-9]+\/[0-9A-z_\-]+\.png/', $data, $matches);
 
 		$out = array();
-		foreach ($matches as $m) {
+		foreach ($matches[0] as $m) {
 			$out[] = self::grabFile('http://' . $m);
 		}dd($out);
 		return $out;
