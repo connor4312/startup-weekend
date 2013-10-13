@@ -27,6 +27,7 @@ Route::group(array('before' => 'auth'), function() {
 	Route::get('/board', 'Controllers\BoardController@index');
 	Route::post('/board/new', 'Controllers\BoardController@create');
 	Route::get('/board/{id}', 'Controllers\BoardController@view');
+	Route::get('/board/{id}/public', 'Controllers\BoardController@makePublic');
 
 	Route::group(array('prefix' => '/api'), function() {
 

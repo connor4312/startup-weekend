@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Models\Board;
 
@@ -44,9 +45,6 @@ class BoardController extends \BaseController {
 	}
 
 	public function view($key) {
-		if (!$b = Board::where('key', $key)->first()) {
-			return App::abort(404);
-		}
 
 		return View::make('pages.board')
 			->with('scripts', array(
@@ -56,6 +54,16 @@ class BoardController extends \BaseController {
 				'js/canvas.min.js'
 			))
 			->with('board', $b);
+	}
+
+	public function makePublic($key) {
+
+		$to = array_key_exists('true', $_GET) ? 1 : 0;
+
+		DB::table('boards')
+			->where('key', $key)
+			->update(array('public' => '1'));
+
 	}
 
 }
