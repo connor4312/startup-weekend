@@ -84,7 +84,8 @@
         <div class="clearfix"></div>
         <div id="act-buttons">
             <div class="btn-group">
-                <a class="btn btn-default" href="#" id="moveForwardButton"><i class="icon-chevron-up"></i> Bring Forward</a> <a class="btn btn-default" href="#" id="moveBackButton"><i class="icon-chevron-up"></i> Send Backwards</a>
+                <a class="btn btn-default" href="#" id="moveForwardButton"><i class="icon-chevron-up"></i> Bring Forward</a>
+                <a class="btn btn-default" href="#" id="moveBackButton"><i class="icon-chevron-up"></i> Send Backwards</a>
                 {{ Form::open(array('url' => '/board/' . $board->key . '/public', 'method' => 'POST', 'id' => 'privacy')) }}
                 {{ Form::checkbox('public', 1, $board->public, array('style' => 'display:none')) }}
                 <div id="privacybtn"></div>
