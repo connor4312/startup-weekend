@@ -50,7 +50,10 @@ class BoardController extends \BaseController {
 
 		return View::make('pages.board')
 			->with('scripts', array(
-				'canvas.min.js'
+				'js/rafael.min.js',
+				'js/ajaxForm.min.js',
+				'js/coloPicker.min.js',
+				'js/canvas.min.js'
 			))
 			->with('board', $b);
 	}
