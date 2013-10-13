@@ -1,5 +1,7 @@
 <?php
 
+use Models\Board;
+
 class BaseController extends Controller {
 
 	/**
