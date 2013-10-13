@@ -1,6 +1,6 @@
 @include('layout.head')
 @include('layout.nav')
-<div class="container">
+<div class="container-board">
   <!-- ###################### LEFT NAVIGATION -->
   
     <div id="left-nav" class="pull-left">
