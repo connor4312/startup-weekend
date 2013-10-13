@@ -37,12 +37,12 @@ class ImgDribbble {
 		return $out;
 	}
 
-	private static function grabFile() {
+	private static function grabFile($url) {
 		$name = str_random(32);
 		$path = storage_path() . '/' . $name . '.tmp';
 
 		$fp = fopen($path, 'w');
-		$ch = curl_init($data->image_url);
+		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 50);
 		curl_setopt($ch, CURLOPT_FILE, $fp);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
