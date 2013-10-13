@@ -33,7 +33,7 @@ class ImgDribbble {
 		$out = array();
 		foreach ($matches[0] as $m) {
 			$out[] = self::grabFile('http://' . $m);
-		}dd($out);
+		}
 		return $out;
 	}
 
