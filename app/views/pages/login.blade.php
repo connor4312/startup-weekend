@@ -15,7 +15,8 @@
             <label for="password">Password</label>
             {{ Form::password('password', array('class' => 'form-control', 'placeholder' => 'Enter Password'))}}
           </div>
-          <button type="submit" class="btn btn-primary">Create Account</button>
+          <button type="submit" class="btn btn-primary">Login</button>
+          {{ HTML::link('/account/register', 'Register', array('class' => 'btn btn-default')) }}
         {{ Form::close() }}
     </div>
   </div>
