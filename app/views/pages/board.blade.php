@@ -75,10 +75,10 @@
     <div id="board" class="pull-left">
         <div id="board-title" class="pull-left">
             <h1>
-                {{ $board-&gt;name }}
+                {{ $board->name }}
             </h1>
             <h5>
-                Created {{ Carbon\Carbon::createFromTimeStamp(strtotime($board-&gt;created_at))-&gt;diffForHumans() }}
+                Created {{ Carbon\Carbon::createFromTimeStamp(strtotime($board->created_at))->diffForHumans() }}
             </h5>
         </div>
         <div class="clearfix"></div>
@@ -87,7 +87,7 @@
                 <a class="btn btn-default" href="#">Bring Forward</a> <a class="btn btn-default" href="#"> Send Backwards</a>
             </div><a class="btn btn-default" href="#"> Share your board</a>
         </div>
-        <div id="canvas" data-key="{{ $board-&gt;key }}"></div>
+        <div id="canvas" data-key="{{ $board->key }}"></div>
     </div>
 </div>
 @include('layout.foot')
