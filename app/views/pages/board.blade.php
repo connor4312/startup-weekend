@@ -74,11 +74,15 @@
 
 
 
-<a data-toggle="modal" href="#image" class="btn btn-default btn-add" id="addColor"><i class="icon-tint"> Create a color swatch</i></a>
+<a class="btn btn-default btn-add" id="addColor"><i class="icon-tint"> Create a color swatch</i></a>
 <div id="pickerContainer">
   <div id="pickerCanvas"></div>
-  <input type="text" id="colorHex" />
-  <button id="selectColor" type="button">Select</button>
+  <div class="input-group">
+    <input type="text" id="colorHex" class="form-control">
+    <span class="input-group-btn">
+      <button id="selectColor" type="button" class="btn btn-default">Select</button>
+    </span>
+  </div>
 </div>
 
 </div>
