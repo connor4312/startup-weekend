@@ -9,7 +9,8 @@ class BoardController extends \BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function index() {
-		return View::make('pages.allboards');
+		return View::make('pages.allboards')
+			->with('boards', Auth::user()->boards);
 	}
 
 	/**
