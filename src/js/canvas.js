@@ -248,9 +248,9 @@ $(function () {
 		}
 	}
 
-	function fetchImage(url) {
+	function fetchImage(url, type) {
 		$.ajax({
-			url: "/api/image/upload?board=" + key + "&type=url&url=" + url,
+			url: "/api/image/upload?board=" + key + "&type=" + type + "&url=" + url,
 			method: "GET",
 			success: addImage,
 			error: function (message) {
@@ -271,7 +271,7 @@ $(function () {
 
 	$("#addImageButton").click(function (event) {
 		event.preventDefault();
-		fetchImage(imageUrl.val());
+		fetchImage(imageUrl.val(), "url");
 	});
 
 	$("#imageUpload").ajaxForm(addImage);
@@ -282,6 +282,7 @@ $(function () {
 	$("#addColor").click(function (event) {
 		var size = $("#left-nav").innerWidth() - 1,
 			position = pickerCanvas.position();
+
 		event.preventDefault();
 
 		if (!colorPicker) {
@@ -305,12 +306,12 @@ $(function () {
 
 	$("#js-dribbble-bucket-sub").click(function (event) {
 		event.preventDefault();
-		fetchImage(dribbleUrl.val());
+		fetchImage(dribbleUrl.val(), "dribbbleBucket");
 	});
 
 	$("#js-pin-sub").click(function (event) {
 		event.preventDefault();
-		fetchImage(pinterestUrl.val());
+		fetchImage(pinterestUrl.val(), "pinterest");
 	});
 
 	$.ajax({
