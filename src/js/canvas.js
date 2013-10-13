@@ -168,7 +168,8 @@
 				width: element._width || null,
 				height: element._height || null,
 				url: element._url || null,
-				index: element._index
+				index: element._index,
+				hex: element._hex || null;
 			});
 		}
 
