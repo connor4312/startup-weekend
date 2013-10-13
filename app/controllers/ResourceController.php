@@ -85,7 +85,7 @@ class ResourceController extends \BaseController {
 
 		foreach (Input::get('elements') as $elem) {
 			$type = $elem['type'];
-			$ctype = 'Elements\\' . ucwords($types);
+			$ctype = 'Elements\\' . ucwords($type);
 
 			$class = new $ctype;
 			$validator = Validator::make(Input::all(), $class->fields);
