@@ -45,7 +45,7 @@ class ImageController extends \BaseController {
 			return array('success' => false, 'error' => 'Type Not Found');
 		}
 
-		$validator = Validator::make(Input::get('all'), $this->types[$type]['validation']);
+		$validator = Validator::make(Input::all(), $this->types[$type]['validation']);
 		if ($validator->fails) {
 			return array('success' => false, 'error' => $validator->messages());
 		}
