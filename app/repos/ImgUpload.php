@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Input;
 class ImgUpload {
 
 	public static function upload() {
-		return Input::file('file')->getRealPath();;
+		return array('success' => true, 'data' => array(Input::file('file')->getRealPath()));
 	}
 
 }
