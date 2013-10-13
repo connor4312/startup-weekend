@@ -133,7 +133,8 @@
 	}
 
 	function addImage(data) {
-		var container = paper.rect(200, 200, data.width, data.height);
+		var container = paper.rect(200, 200, data.width, data.height),
+			image = Object.prototype.toString.call(data) === "[object Array]" ? data[0] : data;
 
 		container.attr({
 			cursor: "move",
