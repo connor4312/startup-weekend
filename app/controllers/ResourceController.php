@@ -15,6 +15,12 @@ use Elements\Text;
 
 class ResourceController extends \BaseController {
 
+	private $types = array(
+		'image',
+		'color',
+		'text'
+	);
+
 	public function __call($methods, $args) {
 
 		list($resource, $method) = explode('_', $methods);
@@ -40,6 +46,64 @@ class ResourceController extends \BaseController {
 		}
 
 		return call_user_func_array(array($this, $method), $args);
+	}
+
+	public function bulkGet() {
+
+		if (!$o = $this->checkBoard()) {
+			$response = array(
+				'success' => false,
+				'error' => 'Board Not Found'
+			);
+			return $response;
+		}
+
+		$elems = Element::where('board_id', $this->board->id)
+			->select('id')
+			->get();
+
+		$out = array();
+		foreach ($elems as $elem) {
+			$out[] = getData($elem->id);
+		}
+
+		return array(
+			'success' => true,
+			'data' => $out
+		);
+	}
+
+	public function bulkSave() {
+
+		if (!$o = $this->checkBoard()) {
+			$response = array(
+				'success' => false,
+				'error' => 'Board Not Found'
+			);
+			return $response;
+		}
+
+		foreach (Input::get('elements') as $elem) {
+			$type = $elem['type'];
+			$ctype = 'Elements\\' . ucwords($types);
+
+			$class = new $ctype;
+			$validator = Validator::make(Input::all(), $class->fields);
+			if ($validator->fails()) {
+				return array('sucess' => false, 'error' => $validator->messages);
+			}
+
+			$e = DB::table('elements')->insertGetId(array(
+					'type' => $type,
+					'board_id' => $this->board->id
+				)
+			);
+
+			foreach ($class->fields as $key => $v) {
+				$this->redis->hset($this->key($e), $key, Input::get($key));
+			}
+		}
+		return array('success' => true);
 	}
 
 	private function checkBoard() {
@@ -108,7 +172,8 @@ class ResourceController extends \BaseController {
 	}
 
 	private function index() {
-		$elems = Element::where('board_id', $board->id)
+		$elems = Element::where('board_id', $this->board->id)
+			->where('type', $this->type)
 			->select('id')
 			->get();
 

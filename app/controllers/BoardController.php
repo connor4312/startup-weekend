@@ -20,6 +20,9 @@ class BoardController extends \BaseController {
 	 * @return \Illuminate\View\View
 	 */
 	public function create() {
+		$validator = Validator::make(Input::all(), array(
+			'name' => 'required|between:3,50'
+		));
 		return View::make('pages.board');
 	}
 

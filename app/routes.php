@@ -25,13 +25,15 @@ Route::post('/account/signup', 'Controllers\LoginController@regsubmit');
 
 Route::group(array('before' => 'auth'), function() {
 	Route::get('/board', 'Controllers\BoardController@index');
-	Route::get('/board/new', 'Controllers\BoardController@create');
+	Route::post('/board/new', 'Controllers\BoardController@create');
 	Route::get('/board/{id}', 'Controllers\BoardController@view');
 
 	Route::group(array('prefix' => '/api'), function() {
 
 		Route::any('/image/upload', 'Controllers\ImageController@upload');
-		
+		Route::get('/', 'Controllers\ResourceController@bulkGet');
+		Route::post('/', 'Controllers\ResourceController@bulkCreate');
+
 		$gencycle = function($resource) {
 			Route::get($resource, 'Controllers\ResourceController@' . $resource .'_index');
 			Route::post($resource, 'Controllers\ResourceController@' . $resource .'_create');
