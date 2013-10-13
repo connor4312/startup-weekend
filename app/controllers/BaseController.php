@@ -20,7 +20,7 @@ class BaseController extends Controller {
 
 	protected function pushBoards() {
 		if (Auth::check()) {
-			Session::put('boards', Board::where('user_id', Auth::user()->id));
+			Session::put('boards', Auth::user()->boards);
 		} else {
 			Session::forget('boards');
 		}
