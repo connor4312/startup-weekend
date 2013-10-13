@@ -70,7 +70,7 @@ class ResourceController extends \BaseController {
 
 		return array(
 			'success' => true,
-			'data' => $out
+			'data' => $this->sortBySubvalue($out, 'index')
 		);
 	}
 
@@ -152,6 +152,21 @@ class ResourceController extends \BaseController {
 			$this->redis->hset($this->key($e), $key, Input::get($key));
 		}
 		return array('success' => true);
+	}
+
+	private function sortBySubvalue($array, $index) {
+		$keys = array();
+		foreach ($array as $key => $value) {
+			$keys[$value[$index]] = $key;
+		}
+		ksort($keys);
+
+		$out = array();
+		foreach ($keys as $key) {
+			$out[] = $array[$key];
+		}
+
+		return $out;
 	}
 
 	private function delete($id) {
