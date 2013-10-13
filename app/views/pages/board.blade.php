@@ -89,7 +89,7 @@
   <div id="board" class="pull-left">
       <div id="board-title" class="pull-left">
           <h1>{{ $board->name }}</h1>
-          <h5>Created {{ Carbon::createFromTimeStamp(strtotime($backup->created_at))->diffForHumans() }}</h5>
+          <h5>Created {{ Carbon\Carbon::createFromTimeStamp(strtotime($backup->created_at))->diffForHumans() }}</h5>
         </div>
   <div class="clearfix"></div>
 
