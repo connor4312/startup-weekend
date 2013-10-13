@@ -45,6 +45,9 @@ class BoardController extends \BaseController {
 	}
 
 	public function view($key) {
+		if (!$b = Board::where('key', $key)->first()) {
+			return App::abort(404);
+		}
 
 		return View::make('pages.board')
 			->with('scripts', array(
