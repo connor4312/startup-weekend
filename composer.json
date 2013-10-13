@@ -5,7 +5,8 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.0.*",
-		"tpyo/amazon-s3-php-class": "dev-master"
+		"tpyo/amazon-s3-php-class": "dev-master",
+		"laravel/curl": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

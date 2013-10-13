@@ -60,7 +60,7 @@ class ImageController extends \BaseController {
 		}
 
 		$this->s3 = new S3(Config::get('mooody.awsAccessKey'), Config::get('mooody.awsSecretKey'));
-		
+
 		$paths = array();
 		foreach ($input as $in) {
 			$paths[] = $this->saveFile($in);
@@ -68,15 +68,20 @@ class ImageController extends \BaseController {
 		return array('success' => true, 'data' => $paths);
 	}
 
+	private function getExtension($file_name) {
+		return substr(strrchr($file_name,'.'),1);
+	}
+
 	private function saveFile($file) {
+		$extension = $this->getExtension($file);
 		$id = DB::table('aws')
 			->insertGetId(array(
 				'board_id' => Input::get('board'),
-				'extension' => $input['extension'],
+				'extension' => $extension,
 				'created_at' => DB::raw('NOW()')
 			));
 
-		$name = 'upload' . $id . '.' . $input['extension'];
+		$name = 'upload' . $id . '.' . $extension;
 
 		$this->s3->putObject(S3::inputFile($path, false), 'mooody', $name, S3::ACL_PUBLIC_READ);
 

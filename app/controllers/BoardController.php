@@ -12,4 +12,12 @@ class BoardController extends \BaseController {
 		return View::make('pages.allboards');
 	}
 
+	/**
+	 * Shows the board view
+	 * @return \Illuminate\View\View
+	 */
+	public function new() {
+		return View::make('pages.board');
+	}
+
 }
