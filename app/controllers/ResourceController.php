@@ -200,6 +200,6 @@ class ResourceController extends \BaseController {
 	}
 
 	private function key($id) {
-		return 'mooody:elem:' . $key;
+		return 'mooody:elem:' . $id;
 	}
 }
