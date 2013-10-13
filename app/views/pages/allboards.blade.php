@@ -14,7 +14,7 @@
               @endif
               <div class="row">
             @endif
-            <div class="col-lg-3" onClick="window.location='{{ URL::to('/board/' . $boards[$i]->id) }}'">
+            <div class="col-lg-3" onClick="window.location='{{ URL::to('/board/' . $boards[$i]->key) }}'">
               <div class="board">
                 <img src="img/board.png">
                 <div class="board-title">
@@ -56,8 +56,6 @@
 
             <span class="input-group-btn">
               <a class="btn btn-default" id="namegen">Help</a>
-            </span>
-            <span class="input-group-btn">
              {{ Form::submit('Create', array('class' => 'btn btn-primary')) }}
             </span>
           </div>

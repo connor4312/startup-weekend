@@ -23,7 +23,26 @@ class BoardController extends \BaseController {
 		$validator = Validator::make(Input::all(), array(
 			'name' => 'required|between:3,50'
 		));
-		return View::make('pages.board');
+		if ($validator->fails()) {
+			return Redirect::to('/board')->withErrors($validator);
+		}
+
+		$board = new Board;
+		$board->user_id = Auth::user()->id;
+		$board->key = str_random(64);
+		$board->name = Input::get('name');
+		$board->save();
+
+		return Redirect::to('/board/' . $board->id);
+	}
+
+	public function view($key) {
+		if (!$b = Board::where('key', $key)->first()) {
+			return App::abort(404);
+		}
+
+		return View::make('pages.board')
+			->with('board', $b);
 	}
 
 }
