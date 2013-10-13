@@ -90,7 +90,7 @@ class ResourceController extends \BaseController {
 			$class = new $ctype;
 			$validator = Validator::make(Input::all(), $class->fields);
 			if ($validator->fails()) {
-				return array('sucess' => false, 'error' => $validator->messages);
+				return array('sucess' => false, 'error' => $validator->messages());
 			}
 
 			$e = DB::table('elements')->insertGetId(array(
