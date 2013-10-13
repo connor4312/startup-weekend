@@ -15,10 +15,11 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           @if (Auth::check())
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Boards <b class="caret"></b></a>
               <ul class="dropdown-menu">
+                @foreach 
                 <li><a href="#">Board #1</a></li>
                 <li><a href="#">Board #2</a></li>
               </ul>
