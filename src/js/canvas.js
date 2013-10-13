@@ -140,13 +140,13 @@
 			cursor: "move",
 			stroke: "#FFF",
 			"stroke-width": 10,
-			fill: "url(" + data.url + ")"
+			fill: "url(" + image.url + ")"
 		});
 
 		container._type = "image";
-		container._width = data.width;
-		container._height = data.height;
-		container._url = data.url;
+		container._width = image.width;
+		container._height = image.height;
+		container._url = image.url;
 
 		initializeElement(container);
 
