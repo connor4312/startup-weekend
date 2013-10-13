@@ -9,6 +9,8 @@ $(function () {
 		pickerCanvas = $("#pickerCanvas"),
 		elements = [],
 		current = null,
+		dribbleUrl = $("#js-dribbble-bucket-in"),
+		pintrestUrl = $("#js-pin-in"),
 		key, i, colorPicker;
 
 	paper.canvas.style.backgroundColor = "#f2f2f2";
@@ -246,6 +248,17 @@ $(function () {
 		}
 	}
 
+	function fetchImage(url) {
+		$.ajax({
+			url: "/api/image/upload?board=" + key + "&type=url&url=" + url,
+			method: "GET",
+			success: addImage,
+			error: function (message) {
+				console.log("There was an error");
+			}
+		});
+	}
+
 	pickerContainer.hide();
 
 	$("#addColorButton").click(function (event) {
@@ -258,14 +271,7 @@ $(function () {
 
 	$("#addImageButton").click(function (event) {
 		event.preventDefault();
-		$.ajax({
-			url: "/api/image/upload?board=" + key + "&type=url&url=" + imageUrl.val(),
-			method: "GET",
-			success: addImage,
-			error: function (message) {
-				console.log("There was an error");
-			}
-		});
+		fetchImage(imageUrl.val());
 	});
 
 	$("#imageUpload").ajaxForm(addImage);
@@ -276,7 +282,7 @@ $(function () {
 	$("#addColor").click(function (event) {
 		event.preventDefault();
 		if (!colorPicker) {
-			colorPicker = Raphael.colorpicker(0, 0, $('#left-nav').innerWidth() - 1, "#EEE", document.getElementById("pickerCanvas"));
+			colorPicker = Raphael.colorpicker(pickerCanvas.position().left, pickerCanvas.position().top, $('#left-nav').innerWidth() - 1, "#EEE", pickerCanvas[0]);
 			colorPicker.onchange = onColorChange(colorPicker);
 			colorPicker.color("#eee");
 			colorHex.val("#eee");
@@ -293,6 +299,16 @@ $(function () {
 	});
 
 	$("#saveButton").click(save);
+
+	$("#js-dribbble-bucket-sub").click(function (event) {
+		event.preventDefault();
+		fetchImage(dribbleUrl.val());
+	});
+
+	$("#js-pin-sub").click(function (event) {
+		event.preventDefault();
+		fetchImage(pintrestUrl.val());
+	});
 
 	$.ajax({
 		url: "/api?board=" + key,
