@@ -1,13 +1,12 @@
 @include('layout.head')
 @include('layout.nav')
 <div class="container">
-<div class="row">
   <!-- ###################### LEFT NAVIGATION -->
   
     <div id="left-nav pull-left">
       <div class="addimage">
         <div class="addimage-inside">
-          <img src="{{ URL::to('img/image.png') }}">
+          <img src="{{ URL::to('img/images.png') }}">
           Upload or Paste Images
         </div>
       </div>
@@ -32,6 +31,6 @@
       </div>
     </div>
 
-</div>
+
 </div>
 @include('layout.foot')
