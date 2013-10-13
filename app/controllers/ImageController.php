@@ -52,7 +52,7 @@ class ImageController extends \BaseController {
 
 		list($class, $method) = explode('@', $this->types[$type]['action']);
 
-		return call_user_func(array($class, $method));
+		return $this->awsUpload((array) call_user_func(array($class, $method)));
 
 	}
 
