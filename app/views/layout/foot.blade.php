@@ -18,7 +18,7 @@
           {{ HTML::script($script) }}
         @endforeach
       @else
-        {{ HTML::script($script) }}
+        {{ HTML::script($scripts) }}
       @endif
     @endif
     <script>
