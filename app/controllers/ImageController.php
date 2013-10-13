@@ -54,7 +54,7 @@ class ImageController extends \BaseController {
 
 		$validator = Validator::make(Input::all(), $this->types[$type]['validation']);
 		if ($validator->fails()) {
-			return array('success' => false, 'error' => $validator->messages());
+			return array('success' => false, 'error' => $validator->messages()->toArray());
 		}
 
 		list($class, $method) = explode('@', $this->types[$type]['action']);

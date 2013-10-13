@@ -40,7 +40,7 @@
                             <input type="hidden" name="type" value="upload">
                             <input type="hidden" name="board" value="{{ $board->key }}">
                           </div>
-                          <input type="submit" name="submit" value="Submit" class="btn btn-default">
+                          <input type="submit" name="submit" value="Submit" class="btn btn-default" id="imageUploadButton">
                         </form>
                     </div>
                 </div><!-- /.modal-content -->
