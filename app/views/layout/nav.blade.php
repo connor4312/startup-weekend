@@ -35,7 +35,7 @@
           @else
           <ul class="nav navbar-nav navbar-right">
             <li>{{ HTML::link('/account/login', 'Login') }}</li>
-            <li>{{ HTML::link('/account/register', 'Register') }}</li>
+            <li>{{ HTML::link('/account/signup', 'Register') }}</li>
           </ul>
           @endif
         </div>
