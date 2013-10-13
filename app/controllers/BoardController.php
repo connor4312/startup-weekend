@@ -11,7 +11,8 @@ class BoardController extends \BaseController {
 	 */
 	public function index() {
 		return View::make('pages.allboards')
-			->with('boards', Auth::user()->boards);
+			->with('boards', Auth::user()->boards)
+			->with('scripts', 'js/createboard.min.js');
 	}
 
 	/**
