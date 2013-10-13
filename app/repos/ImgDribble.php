@@ -31,7 +31,7 @@ class ImgDribbble {
 		$out = array();
 		foreach ($matches as $m) {
 			$out[] = $this->grabFile('http://' . $m);
-		}
+		}dd($out);
 		return $out;
 	}
 
