@@ -223,12 +223,14 @@ $(function () {
 		initializeElement(rectangle);
 
 		pickerContainer.hide();
-		colorPicker.color("#eee");
-		colorHex.css({
+		if (colorPicker) {
+			colorPicker.color("#eee");
+			colorHex.css({
 			background: "#FFF",
-			color: "#000"
-		});
-		colorHex.val("#eee");
+				color: "#000"
+			});
+			colorHex.val("#eee");
+		}
 	}
 
 	function loadElements(data) {
