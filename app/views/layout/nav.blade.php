@@ -20,7 +20,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Boards <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 @if (!Session::get('boards'))
-                  <li><i>{{ HTML::link('/board/new', 'Creat a Board!') }}</i></li>
+                  <li class="muted">{{ HTML::link('/board/new', 'Create a Board!') }}</li>
                 @else
                   @foreach (Session::get('boards') as $board)
                     <li>{{ HTML::link('/board/' . $board->id, $board->name) }}</li>
