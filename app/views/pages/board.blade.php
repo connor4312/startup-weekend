@@ -3,7 +3,7 @@
 <div class="container-board">
     <!-- ###################### LEFT NAVIGATION -->
     <div id="left-nav" class="pull-left">
-        <a data-toggle="modal" href="#image" class="btn btn-default btn-add"><i class="icon-picture">Paste image URL</i></a>
+        <a data-toggle="modal" href="#image" class="btn btn-default btn-add"><i class="icon-picture"></i> Paste image URL</a>
         <div class="modal fade" id="image" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -22,7 +22,32 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
-         <a data-toggle="modal" href="#dribbble" class="btn btn-default btn-add"><i class="icon-dribbble">Paste Dribbble URL</i></a>
+        <a data-toggle="modal" href="#image" class="btn btn-default btn-add"><i class="icon-picture"></i> Paste image URL</a>
+        <div class="modal fade" id="image" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">
+                            Upload an Image
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ URL::to('/api/image/upload') }}" method="post" enctype="multipart/form-data" id="imageUpload">
+                          <div class="form-group">
+                            <label for="exampleInputFile">Upload</label>
+                            <input type="file" name="file" id="file">
+                          </div>
+                          <input type="submit" name="submit" value="Submit" class="btn btn-default">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> <button type="button" class="btn btn-primary" id="addImageButton">Add Image to Board</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+         <a data-toggle="modal" href="#dribbble" class="btn btn-default btn-add"><i class="icon-dribbble"></i> Paste Dribbble URL</a>
         <div class="modal fade" id="dribbble" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -43,7 +68,7 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
-         <a data-toggle="modal" href="#pinterest" class="btn btn-default btn-add"><i class="icon-pinterest">Paste a Pinterest URL</i></a>
+         <a data-toggle="modal" href="#pinterest" class="btn btn-default btn-add"><i class="icon-pinterest"></i> Paste a Pinterest URL</a>
         <div class="modal fade" id="pinterest" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -64,7 +89,7 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
-         <a class="btn btn-default btn-add" id="addColor"><i class="icon-tint">Create a color swatch</i></a>
+         <a class="btn btn-default btn-add" id="addColor"><i class="icon-tint"></i> Create a color swatch</a>
         <div id="pickerContainer">
             <div id="pickerCanvas"></div>
             <div class="input-group">
