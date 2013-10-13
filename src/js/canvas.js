@@ -1,4 +1,4 @@
-(function () {
+$(function () {
 	var container = $("#canvas"),
 		height = 1240,
 		width = 960,
@@ -133,10 +133,8 @@
 	}
 
 	function addImage(response) {
-		var data = response.data[0],
-			container = paper.rect(200, 200, data.width, data.height);
-
-		console.log("Image object", data);
+		var data = response.data ? response.data[0] : response,
+			container = paper.rect(data.x || 200, data.y || 200, data.width, data.height);
 
 		container.attr({
 			cursor: "move",
@@ -206,11 +204,9 @@
 		};
 	}
 
-	function addColor(event) {
-		var rectangle = paper.rect(200, 200, 200, 200),
-			hex = colorHex.val();
-
-		event.preventDefault();
+	function addColor(data) {
+		var rectangle = paper.rect(data ? data.x : 200, data ? data.y : 200, 200, 200),
+			hex = data && data.color || colorHex.val();
 
 		rectangle.attr({
 			fill: hex,
@@ -233,9 +229,25 @@
 		colorHex.val("#eee");
 	}
 
+	function loadElements(data) {
+		var i = 0,
+			element;
+
+		while (element = data[i++]) {
+			if (element.type === "color") {
+				addColor(element);
+			} else {
+				addImage(element);
+			}
+		}
+	}
+
 	pickerContainer.hide();
 
-	$("#addColorButton").click(addColor);
+	$("#addColorButton").click(function (event) {
+		event.preventDefault();
+		addColor();
+	});
 
 	$("#moveBackButton").click(moveCurrentBack);
 	$("#moveForwardButton").click(moveCurrentForward);
@@ -274,4 +286,15 @@
 	});
 
 	$("#saveButton").click(save);
-}(jQuery, Raphael));
+
+	$.ajax({
+		url: "/api?board=" + key,
+		method: "GET",
+		success: function (response) {
+			var data = response.data;
+			if (data.length) {
+				loadElements(data);
+			}
+		}
+	});
+});
