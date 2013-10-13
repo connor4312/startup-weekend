@@ -38,7 +38,7 @@ class ImageController extends \BaseController {
 		'upload' => array(
 			'action' => 'Repos\ImgUpload@upload',
 			'validation' => array(
-				'file' => 'mimes:jpg,png,bmp,gif'
+				'file' => 'required'
 			)
 		)
 	);
