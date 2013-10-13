@@ -149,6 +149,9 @@
 		container._url = data.url;
 
 		initializeElement(container);
+
+		$("#image").modal("hide");
+		imageUrl.val("");
 	}
 
 	function save(event) {
