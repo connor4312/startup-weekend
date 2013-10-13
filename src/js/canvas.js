@@ -82,7 +82,8 @@
 		resetGlow(current, current.selected);
 	}
 
-	function moveCurrentBack() {
+	function moveCurrentBack(event) {
+		event.preventDefault();
 		if (elements.length < 2 || !current || current._index === 0) {
 			return;
 		}
@@ -91,6 +92,7 @@
 	}
 
 	function moveCurrentForward() {
+		event.preventDefault();
 		if (elements.length < 2 || !current || current._index === elements.length - 1) {
 			return;
 		}
@@ -148,7 +150,7 @@
 		initializeElement(container);
 	}
 
-	function save() {
+	function save(event) {
 		var data = {
 				board: key
 			},
@@ -156,6 +158,7 @@
 			elementData = [],
 			element;
 
+		event.preventDefault();
 
 		while (element = elements[i++]) {
 			elementData.push({
@@ -195,9 +198,11 @@
 		};
 	}
 
-	function addColor() {
+	function addColor(event) {
 		var rectangle = paper.rect(200, 200, 200, 200),
 			hex = colorHex.val();
+
+		event.preventDefault();
 
 		rectangle.attr({
 			fill: hex,
@@ -227,7 +232,8 @@
 	$("#moveBackButton").click(moveCurrentBack);
 	$("#moveForwardButton").click(moveCurrentForward);
 
-	$("#addImageButton").click(function () {
+	$("#addImageButton").click(function (event) {
+		event.preventDefault();
 		$.ajax({
 			url: "/api/image/upload?board=" + key + "&type=url&url=" + imageUrl.val(),
 			method: "GET",
@@ -250,7 +256,8 @@
 		});
 	});
 
-	$("#addColor").click(function () {
+	$("#addColor").click(function (event) {
+		event.preventDefault();
 		if (!colorPicker) {
 			colorPicker = Raphael.colorpicker(0, 0, $('#left-nav').innerWidth() - 1, "#EEE", document.getElementById("pickerCanvas"));
 			colorPicker.onchange = onColorChange(colorPicker);
