@@ -132,23 +132,23 @@
 		elements.push(element);
 	}
 
-	function addImage(data) {
-		var container = paper.rect(200, 200, data.width, data.height),
-			image = Object.prototype.toString.call(data) === "[object Array]" ? data[0] : data;
+	function addImage(response) {
+		var data = response.data[0],
+			container = paper.rect(200, 200, data.width, data.height);
 
-		console.log("Image object", image);
+		console.log("Image object", data);
 
 		container.attr({
 			cursor: "move",
 			stroke: "#FFF",
 			"stroke-width": 10,
-			fill: "url(" + unescape(image.url) + ")"
+			fill: "url(" + unescape(data.url) + ")"
 		});
 
 		container._type = "image";
-		container._width = image.width;
-		container._height = image.height;
-		container._url = image.url;
+		container._width = data.width;
+		container._height = data.height;
+		container._url = data.url;
 
 		initializeElement(container);
 
