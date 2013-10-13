@@ -25,8 +25,19 @@
             </div>
           </div>
           <div class="col-lg-3">
+            <div class="board">
+              <img src="img/board.png">
+              <div class="board-title">
+                <h4>Board Name</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3">
             <div class="newboard">
               <p><i class="icon-plus icon-4x"></i></p>
+              <div class="board-title">
+                <h4>Create board</h4>
+              </div>
             </div>
           </div>
         </div>
