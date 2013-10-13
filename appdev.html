@@ -12,7 +12,13 @@
 		<div id="container"></div>
 		Color hex: <input type="text" id="colorHex" /> <button id="addColorButton" type="button">Add a color</button>
 		<button id="moveForwardButton" type="button">Move forward</button> <button id="moveBackButton" type="button">Move back</button>
+		Image URL: <input type="text" id="imageUrl">
 		<button id="addImageButton" type="button">Add Image</button>
+		<form action="url" method="post" enctype="multipart/form-data" id="imageUpload">
+			Image: <input type="file" name="file" id="file"><br />
+			<input type="submit" name="submit" value="Submit">
+		</form>
+
 		<script src="src/js/require.js"></script>
 		<script>
 		(function () {
@@ -29,11 +35,16 @@
 					width = 960,
 					paper = Raphael(container[0], width, height),
 					colorHex = $("#colorHex"),
+					imageUrl = $("#imageUrl"),
 					elements = [],
 					current = null,
-					i;
+					key, i;
+
+				require(["ajaxForm"]);
 
 				paper.canvas.style.backgroundColor = "#f2f2f2";
+				key = "asdasd";
+				paper.canvas.setAttribute("data-key", key);
 
 				function startDrag() {
 					this.ox = this.attr("x");
@@ -151,32 +162,101 @@
 					elements.push(element);
 				}
 
+				function addImage(data) {
+					var container = paper.rect(200, 200, data.width, data.height);
+
+					container.attr({
+						cursor: "move",
+						stroke: "#FFF",
+						"stroke-width": 10,
+						fill: "url(" + data.url + ")"
+					});
+
+					container._type = "image";
+					container._width = data.width;
+					container._height = data.height;
+					container._url = data.url;
+
+					initializeElement(container);
+				}
+
+				function save() {
+					var data = {
+							board: key
+						},
+						i = 0,
+						elementData = [],
+						element;
+
+
+					while (element = elements[i++]) {
+						elementData.push({
+							type: element._type,
+							x: element.attr("x"),
+							y: element.attr("y"),
+							width: element._width || null,
+							height: element._height || null,
+							url: element._url || null,
+							index: element._index
+						});
+					}
+
+					data.elements = elementData;
+
+					$.ajax({
+						url: "/api",
+						method: "POST"
+						data: data,
+						success: function () {
+							console.log("Save successful");
+						},
+						error: function (message) {
+							console.log("There was an error");
+						}
+					});
+				}
+
 				$("#addColorButton").click(function () {
-					var rectangle = paper.rect(200, 200, 200, 200);
+					var rectangle = paper.rect(200, 200, 200, 200),
+						hex = colorHex.val();
 
 					rectangle.attr({
-						fill: colorHex.val(),
+						fill: hex,
 						cursor: "move",
 						stroke: "#FFF",
 						"stroke-width": 10
 					});
+
+					rectangle._type = "color";
+					rectangle._hex = hex;
 
 					initializeElement(rectangle);
 				});
 
 				$("#moveBackButton").click(moveCurrentBack);
 				$("#moveForwardButton").click(moveCurrentForward);
+
 				$("#addImageButton").click(function () {
-					var rectangle = paper.rect(200, 200, 400, 200);
-
-					rectangle.attr({
-						cursor: "move",
-						stroke: "#FFF",
-						"stroke-width": 10,
-						fill: "url(http://www.placecage.com/c/400/200)"
+					$.ajax({
+						url: "/api/image/upload?board=" + key + "&type=url&url=" + imageUrl.val(),
+						method: "GET",
+						success: addImage,
+						error: function (message) {
+							console.log("There was an error");
+						}
 					});
+				});
 
-					initializeElement(rectangle);
+				$("#imageUpload").on("submit", function (event) {
+					event.preventDefault();
+					$(this).ajaxForm({
+						url: "/api/image/upload?board=" + key + "&type=upload",
+						method: "POST",
+						success: addImage,
+						error: function (message) {
+							console.log("There was an error");
+						}
+					});
 				});
 			});
 		}());
