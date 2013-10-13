@@ -205,8 +205,10 @@ $(function () {
 	}
 
 	function addColor(data) {
-		var rectangle = paper.rect(data ? data.x : 200, data ? data.y : 200, 200, 200),
-			hex = data && data.color || colorHex.val();
+		var y = data.y || 200,
+			x = data.x || 200,
+			hext = data.color || colorHex.val(),
+			rectangle = paper.rect(x, y: 200, 200, 200);
 
 		rectangle.attr({
 			fill: hex,
@@ -265,6 +267,9 @@ $(function () {
 	});
 
 	$("#imageUpload").ajaxForm(addImage);
+	$("#imageUploadButton").click(function () {
+		this.disabled = true;
+	});
 
 	$("#addColor").click(function (event) {
 		event.preventDefault();
