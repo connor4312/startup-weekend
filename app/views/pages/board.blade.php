@@ -25,11 +25,12 @@
           <h1>Moody Logo</h1>
           <h5>Created 10/12/13</h5>
         </div>
+  <div class="clearfix"></div>      
 
   <div id="act-buttons">
-    <div class="btn-group">
-  <a class="btn" href="#"><i class="icon-chevron-down"></i></a>
-  <a class="btn" href="#"><i class="icon-chevron-up"></i></a>
+<div class="btn-group">
+  <span class="glyphicon glyphicon-chevron-up"></span>
+  <span class="glyphicon glyphicon-chevron-down"></span>
 </div>
   </div>      
       <div id="canvas">
