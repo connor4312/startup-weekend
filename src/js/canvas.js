@@ -136,11 +136,13 @@
 		var container = paper.rect(200, 200, data.width, data.height),
 			image = Object.prototype.toString.call(data) === "[object Array]" ? data[0] : data;
 
+		console.log("Image object", image);
+
 		container.attr({
 			cursor: "move",
 			stroke: "#FFF",
 			"stroke-width": 10,
-			fill: "url(" + image.url + ")"
+			fill: "url(" + unescape(image.url) + ")"
 		});
 
 		container._type = "image";
