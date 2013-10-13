@@ -19,11 +19,15 @@ $(function () {
 	function startDrag() {
 		this.ox = this.attr("x");
 		this.oy = this.attr("y");
+
+		console.log("starting drag", this.ox, this.oy);
 	}
 
 	function move(dx, dy) {
 		var x = this.ox + dx,
 			y = this.oy + dy;
+
+		console.log("width: ", this.attr("width"), "height:", this.attr("height"));
 
 		x = Math.min(width - this.attr("width") - 10, x);
 		x = Math.max(10, x);
@@ -132,6 +136,8 @@ $(function () {
 		element.drag(move, startDrag, stopDrag);
 
 		elements.push(element);
+
+		console.log(element, element.attr("x"), element.attr("y"));
 	}
 
 	function addImage(response) {
