@@ -137,16 +137,20 @@ $(function () {
 	function addImage(response) {
 		var data = response.data || response,
 			i = 0,
-			image, container;
+			image, container, x, y;
 
 		if (Object.prototype.toString.call(data) !== "[object Array]") {
 			data = [data];
 		}
 
 		while (image = data[i++]) {
-			container = paper.rect(image.x || 200, image.y || 200, image.width, image.height);
+			x = image.x || 200;
+			y = image.y || 200;
+			container = paper.rect(x, y, image.width, image.height);
 
 			container.attr({
+				x: x,
+				y: y,
 				cursor: "move",
 				stroke: "#FFF",
 				"stroke-width": 10,
@@ -224,6 +228,8 @@ $(function () {
 			rectangle = paper.rect(x, y, 200, 200);
 
 		rectangle.attr({
+			x: x,
+			y: y,
 			fill: hex,
 			cursor: "move",
 			stroke: "#FFF",
