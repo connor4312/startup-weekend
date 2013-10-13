@@ -252,18 +252,7 @@
 		});
 	});
 
-	$("#imageUpload").on("submit", function (event) {
-		event.preventDefault();
-		console.log('asdf');
-		$(this).ajaxForm({
-			url: "/api/image/upload?board=" + key + "&type=upload",
-			method: "POST",
-			success: addImage,
-			error: function (message) {
-				console.log("There was an error");
-			}
-		});
-	});
+	$("#imageUpload").ajaxForm(addImage);
 
 	$("#addColor").click(function (event) {
 		event.preventDefault();
