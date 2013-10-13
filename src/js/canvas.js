@@ -169,7 +169,7 @@
 				height: element._height || null,
 				url: element._url || null,
 				index: element._index,
-				hex: element._hex || null
+				color: element._hex || null
 			});
 		}
 
