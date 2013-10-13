@@ -171,9 +171,10 @@ $(function () {
 		$("#imageupload").modal("hide");
 		$("#dribbble").modal("hide");
 		$("#pinterest").modal("hide");
-		$("#imageUploadButton")[0].disabled = false;
-		$("#js-dribbble-bucket-sub")[0].disabled = false;
-		$("#js-pin-sub")[0].disabled = false;
+		$("#addImageButton").attr("disabled", false);
+		$("#imageUploadButton").attr("disabled", false);
+		$("#js-dribbble-bucket-sub").attr("disabled", false);
+		$("#js-pin-sub").attr("disabled", false);
 		imageUrl.val("");
 	}
 
@@ -294,11 +295,12 @@ $(function () {
 	$("#addImageButton").click(function (event) {
 		event.preventDefault();
 		fetchImage(imageUrl.val(), "url");
+		$(this).attr("disabled", true);;
 	});
 
 	$("#imageUpload").ajaxForm(addImage);
 	$("#imageUploadButton").click(function () {
-		this.disabled = true;
+		$(this).attr("disabled", true);;
 	});
 
 	$("#addColor").click(function (event) {
@@ -327,15 +329,15 @@ $(function () {
 	$("#saveButton").click(save);
 
 	$("#js-dribbble-bucket-sub").click(function (event) {
-		this.disabled = true;
 		event.preventDefault();
 		fetchImage(dribbleUrl.val(), "dribbbleBucket");
+		$(this).attr("disabled", true);;
 	});
 
 	$("#js-pin-sub").click(function (event) {
-		this.disabled = true;
 		event.preventDefault();
 		fetchImage(pinterestUrl.val(), "pinterest");
+		$(this).attr("disabled", true);;
 	});
 
 	$.ajax({
