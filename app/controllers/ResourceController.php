@@ -49,6 +49,7 @@ class ResourceController extends \BaseController {
 	}
 
 	public function bulkGet() {
+		$this->redis = Redis::connection();
 
 		if (!$o = $this->checkBoard()) {
 			$response = array(
@@ -64,7 +65,7 @@ class ResourceController extends \BaseController {
 
 		$out = array();
 		foreach ($elems as $elem) {
-			$out[] = getData($elem->id);
+			$out[] = $this->getData($elem->id);
 		}
 
 		return array(
@@ -74,6 +75,7 @@ class ResourceController extends \BaseController {
 	}
 
 	public function bulkSave() {
+		$this->redis = Redis::connection();
 
 		if (!$o = $this->checkBoard()) {
 			$response = array(
@@ -184,7 +186,7 @@ class ResourceController extends \BaseController {
 
 		$out = array();
 		foreach ($elems as $elem) {
-			$out[] = getData($elem->id);
+			$out[] = $this->getData($elem->id);
 		}
 
 		return array(
@@ -198,6 +200,6 @@ class ResourceController extends \BaseController {
 	}
 
 	private function key($id) {
-		return 'mooody:elem:' . $key;
+		return 'mooody:elem:' . $id;
 	}
 }
