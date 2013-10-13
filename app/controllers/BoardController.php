@@ -55,6 +55,7 @@ class BoardController extends \BaseController {
 				'js/ajaxForm.min.js',
 				'js/colorPicker.min.js',
 				'js/canvas.min.js'
+				'js/switchButton.min.js'
 			))
 			->with('board', $b);
 	}
