@@ -1,0 +1,185 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<style>
+			body {
+				margin: 0px;
+				padding: 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container"></div>
+		Color hex: <input type="text" id="colorHex" /> <button id="addColorButton" type="button">Add a color</button>
+		<button id="moveForwardButton" type="button">Move forward</button> <button id="moveBackButton" type="button">Move back</button>
+		<button id="addImageButton" type="button">Add Image</button>
+		<script src="src/js/require.js"></script>
+		<script>
+		(function () {
+			require.config({
+				baseUrl: "src/js"
+			});
+
+			require([
+				"jquery",
+				"raphael"
+			], function ($, Raphael) {
+				var container = $("#container"),
+					height = 1240,
+					width = 960,
+					paper = Raphael(container[0], width, height),
+					colorHex = $("#colorHex"),
+					elements = [],
+					current = null,
+					i;
+
+				paper.canvas.style.backgroundColor = "#f2f2f2";
+
+				function startDrag() {
+					this.ox = this.attr("x");
+					this.oy = this.attr("y");
+				}
+
+				function move(dx, dy) {
+					var x = this.ox + dx,
+						y = this.oy + dy;
+
+					x = Math.min(width - this.attr("width") - 10, x);
+					x = Math.max(10, x);
+					y = Math.min(height - this.attr("height") - 10, y);
+					y = Math.max(10, y);
+					this.attr({
+						x: x,
+						y: y
+					});
+
+					this._moving = true;
+
+					if (this._glow) {
+						this._glow.remove();
+						this._glow = undefined;
+					}
+				}
+
+				function stopDrag(event) {
+					resetGlow(this, this.selected);
+				}
+
+				function resetGlow(element, selected) {
+					if (element._glow) {
+						element._glow.remove();
+					}
+
+					element._glow = element.glow({
+						color: selected ? "#21a3c9" : "#000000"
+					});
+				}
+
+				function deselect(element) {
+					if (!element) {
+						return;
+					}
+
+					element.selected = false;
+					resetGlow(element, false);
+					current = null;
+				}
+
+				function select(element) {
+					element.selected = true;
+					resetGlow(element, true);
+					current = element;
+				}
+
+				function moveCurrent(forward) {
+					var index = current._index,
+						next = elements.splice(forward ? index + 1 : index - 1, 1)[0];
+
+					current._index = forward ? current._index + 1 : current._index - 1;
+					next._index = forward ? next._index - 1 : next._index + 1;
+
+					current[forward ? "insertAfter" : "insertBefore"](next);
+					elements.splice(next._index, 0, next);
+					resetGlow(current, current.selected);
+				}
+
+				function moveCurrentBack() {
+					if (elements.length < 2 || !current || current._index === 0) {
+						return;
+					}
+
+					moveCurrent(false)
+				}
+
+				function moveCurrentForward() {
+					if (elements.length < 2 || !current || current._index === elements.length - 1) {
+						return;
+					}
+
+					moveCurrent(true);
+				}
+
+				$(paper.canvas).click(function () {
+					deselect(current);
+				});
+
+				function initializeElement(element) {
+					element._index = elements.length;
+
+					element.click(function (event) {
+						event.stopPropagation();
+
+						if (this === current && !this._moving) {
+							deselect(this);
+						}
+
+						if (this._moving) {
+							this._moving = false;
+						}
+					});
+
+					element.dblclick(function (event) {
+						event.stopPropagation();
+						deselect(current);
+						select(this);
+					});
+
+					element._glow = element.glow();
+
+					element.drag(move, startDrag, stopDrag);
+
+					elements.push(element);
+				}
+
+				$("#addColorButton").click(function () {
+					var rectangle = paper.rect(200, 200, 200, 200);
+
+					rectangle.attr({
+						fill: colorHex.val(),
+						cursor: "move",
+						stroke: "#FFF",
+						"stroke-width": 10
+					});
+
+					initializeElement(rectangle);
+				});
+
+				$("#moveBackButton").click(moveCurrentBack);
+				$("#moveForwardButton").click(moveCurrentForward);
+				$("#addImageButton").click(function () {
+					var rectangle = paper.rect(200, 200, 400, 200);
+
+					rectangle.attr({
+						cursor: "move",
+						stroke: "#FFF",
+						"stroke-width": 10,
+						fill: "url(http://www.placecage.com/c/400/200)"
+					});
+
+					initializeElement(rectangle);
+				});
+			});
+		}());
+		</script>
+	</body>
+</html>
