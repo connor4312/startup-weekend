@@ -86,6 +86,7 @@
             <div class="btn-group">
                 <a class="btn btn-default" href="#">Bring Forward</a> <a class="btn btn-default" href="#"> Send Backwards</a>
             </div><a class="btn btn-default" href="#"> Share your board</a>
+            <a href="#" class="btn btn-primary pull-right"><i class="icon-download-alt"></i> Save</a>
         </div>
         <div id="canvas" data-key="{{ $board->key }}"></div>
     </div>
