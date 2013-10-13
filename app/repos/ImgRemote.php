@@ -5,21 +5,24 @@ use Illuminate\Support\Facades\Input;
 class ImgRemote {
 
 	private static $allowedTypes = array(
-		'image/png',
-		'image/gif',
-		'image/jpg',
-		'image/jpeg',
-		'image/bmp',
+		'image/png' => 'png',
+		'image/gif' => 'gif',
+		'image/jpg' => 'jpg',
+		'image/jpeg' => 'jpg',
+		'image/bmp' => 'bmp',
 	);
 
 	public static function download() {
-		$file = self::grabFile(Input::get('url'));
+		$file = self::grabFile(Input::get('url'), 'tmp');
 
-		if (!in_array($file['mime'], self::$allowedTypes)) {
+		if (!array_key_exists($file['mime'], self::$allowedTypes)) {
 			return array('success' => false, 'data' => 'Not a valid image, ' . $file['mime']);
 		}
 
-		return array('success' => 'true', 'data' => array($file['path']));
+		$newpath = preg_replace('/tmp$/', self::$allowedTypes[$file['mime']], $file['path']);
+		rename($file['path'], $newpath);
+
+		return array('success' => 'true', 'data' => array($newpath));
 	}
 
 	public static function shot() {
@@ -55,9 +58,12 @@ class ImgRemote {
 		return array('success' => true, 'data' => $out);
 	}
 
-	private static function grabFile($url) {
+	private static function grabFile($url, $extension = null) {
 		$name = str_random(32);
-		$path = storage_path() . '/' . $name . '.' . substr(strrchr($url, '.'), 1);
+
+		$ext = $extension ? $extension : substr(strrchr($url, '.'), 1);
+
+		$path = storage_path() . '/' . $name . '.' . $ext;
 
 		$fp = fopen($path, 'w');
 		$ch = curl_init($url);
