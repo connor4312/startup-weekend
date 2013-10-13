@@ -49,10 +49,14 @@ class ImgRemote {
 		$curl = new \Curl;
 		$data = $curl->simple_get(Input::get('url'));
 
-		preg_match_all('/dribbble\.s3\.amazonaws\.com\/users\/[0-9]+\/screenshots\/[0-9]+\/[0-9A-z_\-]+\.png/', $data, $matches);
+		preg_match_all('/dribbble\.s3\.amazonaws\.com\/users\/[0-9]+\/screenshots\/[0-9]+\/[0-9A-z_\-]+\.[a-z]{3}/', $data, $matches);
 
 		$out = array();
 		foreach ($matches[0] as $m) {
+			if (preg_match('/_teaser\.[a-z]{3}$/', $m)) {
+				continue;
+			}
+			
 			$out[] = self::grabFile('http://' . $m)['path'];
 		}
 		return array('success' => true, 'data' => $out);
@@ -70,9 +74,6 @@ class ImgRemote {
 
 		$out = array();
 		foreach ($matches[0] as $m) {
-			if (preg_match('/_teaser\.[a-z]{3}$/', $m)) {
-				continue;
-			}
 			$out[] = self::grabFile('http://' . $m)['path'];
 		}
 		return array('success' => true, 'data' => $out);
