@@ -44,7 +44,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                              <input type="submit" name="submit" value="Submit" class="btn btn-primary" id="imageUploadButton">
+                            <input type="submit" name="submit" value="Submit" class="btn btn-primary" id="imageUploadButton">
                         </div>
                     </form>
                 </div><!-- /.modal-content -->
