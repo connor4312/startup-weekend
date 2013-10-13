@@ -52,13 +52,13 @@
       <div class="modal-body">
         {{ Form::open(array('url' => '/board/new', 'method' => 'POST')) }}
           <div class="input-group">
-            {{ Input::text('name', '', array('placeholder' => 'Board Name', 'class' => 'form-control', 'id' => 'name'))}}
+            {{ Form::text('name', '', array('placeholder' => 'Board Name', 'class' => 'form-control', 'id' => 'name'))}}
 
             <span class="input-group-btn">
               <a class="btn btn-default" id="namegen">Help</a>
             </span>
             <span class="input-group-btn">
-             {{ Input::submit('Create', array('class' => 'btn btn-primary')) }}
+             {{ Form::submit('Create', array('class' => 'btn btn-primary')) }}
             </span>
           </div>
         {{ Form::close() }}
