@@ -114,8 +114,14 @@
                 <a class="btn btn-default" href="#" id="moveForwardButton"><i class="icon-chevron-up"></i> Bring Forward</a>
                 <a class="btn btn-default" href="#" id="moveBackButton"><i class="icon-chevron-up"></i> Send Backwards</a>
                 {{ Form::open(array('url' => '/board/' . $board->key . '/public', 'method' => 'POST', 'id' => 'privacy')) }}
-                {{ Form::checkbox('public', 1, $board->public, array('style' => 'display:none')) }}
-                <div id="privacybtn" class="toggle-slide"></div>
+                <div class="btn-group" data-toggle="buttons">
+                  <label class="btn btn-default">
+                    <input type="radio" name="public" value="1"> Private
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="radio" name="private" value="2"> Public
+                  </label>
+                </div>
                 {{ Form::close() }}
             </div>
             <a href="#" class="btn btn-primary pull-right" id="saveButton"><i class="icon-download-alt"></i> Save</a>
