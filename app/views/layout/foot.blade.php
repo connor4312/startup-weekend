@@ -1,4 +1,13 @@
-
+    <div id="footer">
+      <div class="container">
+        <div class="col-md-6">
+          Created at <a href="https://twitter.com/search?q=%23swpns&amp;src=hash">#SWPNS</a>
+        </div>
+        <div class="col-md-6">
+          &copy; {{ date('Y') }} Mooody
+        </div>
+      </div>
+    </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     {{ HTML::script('js/bootstrap.min.js') }}
     {{ HTML::script('js/jquery.min.js') }}
