@@ -50,7 +50,7 @@ class BoardController extends \BaseController {
 
 		return View::make('pages.board')
 			->with('scripts', array(
-				
+				'canvas.min.js'
 			))
 			->with('board', $b);
 	}
