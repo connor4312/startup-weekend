@@ -39,7 +39,7 @@ class ImgDribbble {
 
 	private static function grabFile($url) {
 		$name = str_random(32);
-		$path = storage_path() . '/' . $name . '.tmp';
+		$path = storage_path() . '/' . $name . '.' . substr(strrchr($url, '.'), 1);
 
 		$fp = fopen($path, 'w');
 		$ch = curl_init($url);
