@@ -49,6 +49,7 @@ class ResourceController extends \BaseController {
 	}
 
 	public function bulkGet() {
+		$this->redis = Redis::connection();
 
 		if (!$o = $this->checkBoard()) {
 			$response = array(
@@ -74,6 +75,7 @@ class ResourceController extends \BaseController {
 	}
 
 	public function bulkSave() {
+		$this->redis = Redis::connection();
 
 		if (!$o = $this->checkBoard()) {
 			$response = array(
