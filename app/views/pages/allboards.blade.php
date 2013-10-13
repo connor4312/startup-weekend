@@ -8,7 +8,7 @@
     <div class="col-lg-12">
       <div id="allboards">
           @for ($i = 0, $n = count($boards); $i < $n; $i++)
-            @if ($i / 3 == floor($i / 3))
+            @if ($i / 4 == floor($i / 4))
               @if ($i > 0)
                 </div>
               @endif
@@ -23,7 +23,7 @@
               </div>
             </div>
           @endfor
-          @if ($n / 3 == floor($n / 3))
+          @if ($n / 4 == floor($n / 4))
             @if ($n > 0)
               </div>
             @endif
