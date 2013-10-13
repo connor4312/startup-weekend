@@ -19,15 +19,11 @@ $(function () {
 	function startDrag() {
 		this.ox = this.attr("x");
 		this.oy = this.attr("y");
-
-		console.log("starting drag", this.ox, this.oy);
 	}
 
 	function move(dx, dy) {
 		var x = this.ox + dx,
 			y = this.oy + dy;
-
-		console.log("width: ", this.attr("width"), "height:", this.attr("height"), dx, dy, x, y);
 
 		x = Math.min(width - this.attr("width") - 10, x);
 		x = Math.max(10, x);
@@ -150,8 +146,8 @@ $(function () {
 		}
 
 		while (image = data[i++]) {
-			x = image.x || 200;
-			y = image.y || 200;
+			x = parseInt(image.x) || 200;
+			y = parseInt(image.y) || 200;
 			container = paper.rect(x, y, image.width, image.height);
 
 			container.attr({
@@ -228,8 +224,8 @@ $(function () {
 	}
 
 	function addColor(data) {
-		var y = data.y || 200,
-			x = data.x || 200,
+		var y = parseInt(data.y) || 200,
+			x = parseInt(data.x) || 200,
 			hex = data.color || colorHex.val(),
 			rectangle = paper.rect(x, y, 200, 200);
 
