@@ -17,7 +17,7 @@ class ImgDribbble {
 			return false;
 		}
 
-		return self::grabFile(Input::get('url'));
+		return self::grabFile($data->image_url);
 	}
 
 	public static function bucket() {
