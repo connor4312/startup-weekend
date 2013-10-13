@@ -1,5 +1,7 @@
 <?php namespace Repos;
 
+use Illuminate\Support\Facades\Input;
+
 class ImgDribbble {
 
 	public static function shot() {
