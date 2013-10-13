@@ -171,6 +171,9 @@ $(function () {
 		$("#imageupload").modal("hide");
 		$("#dribbble").modal("hide");
 		$("#pinterest").modal("hide");
+		$("#imageUploadButton")[0].disabled = false;
+		$("#js-dribbble-bucket-sub")[0].disabled = false;
+		$("#js-pin-sub")[0].disabled = false;
 		imageUrl.val("");
 	}
 
@@ -324,11 +327,13 @@ $(function () {
 	$("#saveButton").click(save);
 
 	$("#js-dribbble-bucket-sub").click(function (event) {
+		this.disabled = true;
 		event.preventDefault();
 		fetchImage(dribbleUrl.val(), "dribbbleBucket");
 	});
 
 	$("#js-pin-sub").click(function (event) {
+		this.disabled = true;
 		event.preventDefault();
 		fetchImage(pinterestUrl.val(), "pinterest");
 	});
