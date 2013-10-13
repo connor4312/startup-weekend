@@ -89,7 +89,7 @@ class ImageController extends \BaseController {
 
 		$name = 'upload' . $id . '.' . $extension;
 
-		$this->s3->putObject(S3::inputFile($path, false), 'mooody', $name, S3::ACL_PUBLIC_READ);
+		$this->s3->putObject(S3::inputFile($file, false), 'mooody', $name, S3::ACL_PUBLIC_READ);
 
 		unlink($path);
 
