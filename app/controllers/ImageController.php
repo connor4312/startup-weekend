@@ -53,7 +53,7 @@ class ImageController extends \BaseController {
 
 		list($class, $method) = explode('@', $this->types[$type]['action']);
 
-		return $this->awsUpload((array) call_user_func(array($class, $method)));
+		return $this->awsUpload(call_user_func(array($class, $method)));
 
 	}
 
@@ -65,7 +65,7 @@ class ImageController extends \BaseController {
 		$this->s3 = new S3(Config::get('mooody.awsAccessKey'), Config::get('mooody.awsSecretKey'));
 
 		$paths = array();
-		foreach ($input as $in) {
+		foreach ($input['data'] as $in) {
 			if (!$in) {
 				continue;
 			}

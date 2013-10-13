@@ -17,7 +17,7 @@ class ImgDribbble {
 			return array('success' => false, 'Could not find shot');
 		}
 
-		return array('success' => true, 'data' => self::grabFile($data->image_url));
+		return array('success' => true, 'data' => array(self::grabFile($data->image_url)));
 	}
 
 	public static function bucket() {
