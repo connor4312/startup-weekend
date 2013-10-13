@@ -280,9 +280,12 @@ $(function () {
 	});
 
 	$("#addColor").click(function (event) {
+		var size = $("#left-nav").innerWidth() - 1,
+			position = pickerCanvas.position();
 		event.preventDefault();
+
 		if (!colorPicker) {
-			colorPicker = Raphael.colorpicker(pickerCanvas.position().left, pickerCanvas.position().top, $('#left-nav').innerWidth() - 1, "#EEE", pickerCanvas[0]);
+			colorPicker = Raphael.colorpicker(position.left - size, position.top - size, size, "#EEE", pickerCanvas[0]);
 			colorPicker.onchange = onColorChange(colorPicker);
 			colorPicker.color("#eee");
 			colorHex.val("#eee");
