@@ -22,7 +22,8 @@
                 @if (!Session::get('boards'))
                   <li class="muted">{{ HTML::link('/board', 'Create a Board!') }}</li>
                 @else
-                  @foreach (Session::get('boards') as $board)
+                  <?php $boards = Session::get('boards') ?>
+                  @foreach ($boards as $board)
                     <li>{{ HTML::link('/board/' . $board->id, $board->name) }}</li>
                   @endforeach
                 @endif
