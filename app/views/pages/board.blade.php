@@ -20,7 +20,7 @@
     </div>
   
   <!-- ####################### BOARD -->
-  <div id="board" class="pull-left">
+  <div id="board">
       <div id="board-title" class="pull-left">
           <h1>Moody Logo</h1>
           <h5>Created 10/12/13</h5>
