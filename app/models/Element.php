@@ -3,6 +3,6 @@
 class Element extends \Eloquent {
 
 	public function board() {
-		return $this->belongsTo('Board');
+		return $this->belongsTo('Models\Board');
 	}
 }
