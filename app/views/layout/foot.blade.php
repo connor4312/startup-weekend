@@ -9,9 +9,8 @@
         </div>
       </div>
     </div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     {{ HTML::script('js/bootstrap.min.js') }}
-    {{ HTML::script('js/jquery.min.js') }}
     @if (isset($scripts))
       @if (is_array($scripts))
         @foreach ($scripts as $script)
