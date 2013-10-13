@@ -2,8 +2,8 @@
 
 class ImgDribbble {
 
-	public static function shot($url) {
-		preg_match('/[0-9]+|-[A-z]+$/', $url, $matches);
+	public static function shot() {
+		preg_match('/[0-9]+|-[A-z]+$/', Input::get('url'), $matches);
 		if (!array_key_exists(0, $matches)) {
 			return false;
 		}
@@ -15,16 +15,16 @@ class ImgDribbble {
 			return false;
 		}
 
-		return self::grabFile($url);
+		return self::grabFile(Input::get('url'));
 	}
 
-	public static function bucket($url) {
-		if (!preg_match('/\/\/dribbble.com\/[A-z_\-]+\/buckets\/[0-9A-z_\-]+/', $url)) {
+	public static function bucket() {
+		if (!preg_match('/\/\/dribbble.com\/[A-z_\-]+\/buckets\/[0-9A-z_\-]+/', Input::get('url'))) {
 			return false;
 		}
 
 		$curl = new \Curl;
-		$data = json_decode($curl->simple_get($url));
+		$data = json_decode($curl->simple_get(Input::get('url')));
 
 		preg_match('/dribbble\.s3\.amazonaws\.com\/users\/[0-9]+\/screenshots\/[0-9]+\/[0-9A-z_\-]+\.png/', $data, $matches);
 
@@ -35,7 +35,7 @@ class ImgDribbble {
 		return $out;
 	}
 
-	private static function grabFile($url) {
+	private static function grabFile() {
 		$name = str_random(32);
 		$path = storage_path() . '/' . $name . '.tmp';
 
