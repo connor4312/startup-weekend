@@ -2,7 +2,7 @@
 
 class ImgDribbble {
 
-	public function shot($url) {
+	public static function shot($url) {
 		preg_match('/[0-9]+|-[A-z]+$/', $url, $matches);
 		if (!array_key_exists(0, $matches)) {
 			return false;
@@ -15,10 +15,10 @@ class ImgDribbble {
 			return false;
 		}
 
-		return $this->grabFile($url);
+		return self::grabFile($url);
 	}
 
-	public function bucket($url) {
+	public static function bucket($url) {
 		if (!preg_match('/\/\/dribbble.com\/[A-z_\-]+\/buckets\/[0-9A-z_\-]+/', $url)) {
 			return false;
 		}
@@ -30,12 +30,12 @@ class ImgDribbble {
 
 		$out = array();
 		foreach ($matches as $m) {
-			$out[] = $this->grabFile('http://' . $m);
+			$out[] = self::grabFile('http://' . $m);
 		}dd($out);
 		return $out;
 	}
 
-	private function grabFile($url) {
+	private static function grabFile($url) {
 		$name = str_random(32);
 		$path = storage_path() . '/' . $name . '.tmp';
 
