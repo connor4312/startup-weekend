@@ -1,6 +1,7 @@
 <?php namespace Controllers;
 
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
 
 class BoardController extends \BaseController {
 
