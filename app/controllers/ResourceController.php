@@ -107,7 +107,7 @@ class ResourceController extends \BaseController {
 			);
 
 			foreach ($class->fields as $key => $v) {
-				$this->redis->hset($this->key($e), $key, Input::get($key));
+				$this->redis->hset($this->key($e), $key, $elem[$key]);
 			}
 		}
 		return array('success' => true);
