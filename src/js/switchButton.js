@@ -1,252 +1,278 @@
-/*
- * jQuery switchbutton
- *
- * Based on work by tdreyno on iphone-style-checkboxes for events management
- * (https://github.com/tdreyno/iphone-style-checkboxes)
- * 
- * Copyright 2011, L.STEVENIN
- * Released under the MIT license.
- *
- * Depends:
- *  jquery.ui.widget.js (jQuery UI Widget Factory - http://wiki.jqueryui.com/w/page/12138135/Widget%20factory)
- *  jquery.tmpl.js (jQuery Templates - http://api.jquery.com/category/plugins/templates/)
- */
+/**
+@license jQuery Toggles v2.0.4
+Copyright 2013 Simon Tabor - MIT License
+https://github.com/simontabor/jquery-toggles / http://simontabor.com/labs/toggles
+*/
+$.fn['toggles'] = function(options) {
+  options = options || {};
 
-(function($, switchbutton){
-    
-    $.widget('switchbutton.switchbutton', {
-        
-        options: {
-            classes: '',
-            duration: 200,
-            dragThreshold: 5,
-            autoResize: true,
-            labels: true,
-            checkedLabel: 'ON',
-            uncheckedLabel: 'OFF',
-            disabledClass: 'ui-switchbutton-disabled ui-state-disabled',
-            template:   '<div class="ui-switchbutton ui-switchbutton-default ${classes} {{if !labels}}ui-switchbutton-no-labels{{/if}}">' +
-                            '<label class="ui-switchbutton-disabled">' +
-                                '<span>{{if labels}}${uncheckedLabel}{{/if}}</span>' +
-                            '</label>' +
-                            '<label class="ui-switchbutton-enabled">' +
-                                '<span>{{if labels}}${checkedLabel}{{/if}}</span>' +
-                            '</label>' +
-                            '<div class="ui-switchbutton-handle"></div>' +
-                        '</div>'
-        },
-        
-        _create: function() {
-            if(!this.element.is(':checkbox')) {
-                return;
-            }
-            
-            this._wrapCheckboxInContainer();
-            this._attachEvents();
-            this._globalEvents();
-            this._disableTextSelection();
-            
-            if(this.element.prop('checked')) {
-                this.$container.toggleClass('ui-state-active', this.element.prop('checked'));
-            }
-            
-            if(this.options.autoResize) {
-                this._autoResize();
-            }
-                
-            this._initialPosition();
-        },
-        
-        _wrapCheckboxInContainer: function() {
-            this.$container = $.tmpl(this.options.template, this.options);
+  // extend default opts with the users options
+  var opts = $.extend({
+    'drag': true, // can the toggle be dragged
+    'click': true, // can it be clicked to toggle
+    'text': {
+      'on': 'ON', // text for the ON position
+      'off': 'OFF' // and off
+    },
+    'on': false, // is the toggle ON on init
+    'animate': 250, // animation time
+    'transition': 'ease-in-out', // animation transition,
+    'checkbox': null, // the checkbox to toggle (for use in forms)
+    'clicker': null, // element that can be clicked on to toggle. removes binding from the toggle itself (use nesting)
+    'width': 50, // width used if not set in css
+    'height': 20, // height if not set in css
+    'type': 'compact' // defaults to a compact toggle, other option is 'select' where both options are shown at once
+  },options);
 
-            this.element.after(this.$container);
-            this.element.remove();
-            this.$container.append(this.element);
+  var selectType = (opts['type'] == 'select');
 
-            this.$disabledLabel = this.$container.children('.ui-switchbutton-disabled');
-            this.$disabledSpan  = this.$disabledLabel.children('span');
-            this.$enabledLabel  = this.$container.children('.ui-switchbutton-enabled');
-            this.$enabledSpan   = this.$enabledLabel.children('span');
-            this.$handle  = this.$container.children('.ui-switchbutton-handle');
-        },
-        
-        _attachEvents: function() {
-            var obj = this;
+  // ensure these are jquery elements
+  opts['checkbox'] = $(opts['checkbox']); // doesnt matter for checkbox
 
-            this.$container
-                // A mousedown anywhere in the control will start tracking for dragging
-                .bind('mousedown touchstart', function(event) {
-                    event.preventDefault();
+  if (opts['clicker']) opts['clicker'] = $(opts['clicker']); // leave as null if not set
 
-                    if(obj.element.prop('disabled')) { return; }
+  // use native transitions if possible
+  var transition = 'margin-left '+opts['animate']+'ms '+opts['transition'];
+  var transitions = {
+    '-webkit-transition': transition,
+    '-moz-transition': transition,
+    'transition': transition
+  };
 
-                    var x = event.pageX || event.originalEvent.changedTouches[0].pageX;
-                    $[switchbutton].currentlyClicking   = obj.$handle;
-                    $[switchbutton].dragStartPosition   = x;
-                    $[switchbutton].handleLeftOffset    = parseInt(obj.$handle.css('left'), 10) || 0;
-                    $[switchbutton].dragStartedOn       = obj.element;
-                })
+  // for resetting transitions to none
+  var notransitions = {
+    '-webkit-transition': '',
+    '-moz-transition': '',
+    'transition': ''
+  };
 
-                // Utilize event bubbling to handle drag on any element beneath the container
-                .bind('iPhoneDrag', function(event, x) {
-                    event.preventDefault();
+  // this is the actual toggle function which does the toggling
+  var doToggle = function(slide, width, height, state) {
+    var active = slide.toggleClass('active').hasClass('active');
 
-                    if(obj.element.prop('disabled')) { return; }
-                    if(obj.element != $[switchbutton].dragStartedOn) { return; }
+    if (state === active) return;
 
-                    var p = (x + $[switchbutton].handleLeftOffset - $[switchbutton].dragStartPosition) / obj.rightSide;
-                    if(p < 0) { p = 0; }
-                    if(p > 1) { p = 1; }
-                    obj.$handle.css({ 'left': p * obj.rightSide });
-                    obj.$enabledLabel.css({ 'width': p * obj.rightSide });
-                    obj.$disabledSpan.css({ 'margin-right': -p * obj.rightSide });
-                    obj.$enabledSpan.css({ 'margin-left': -(1 - p) * obj.rightSide });
-                })
+    var inner = slide.find('.toggle-inner').css(transitions);
 
-                // Utilize event bubbling to handle drag end on any element beneath the container
-                .bind('iPhoneDragEnd', function(event, x) {
-                    if(obj.element.prop('disabled')) { return; }
+    slide.find('.toggle-off').toggleClass('active');
+    slide.find('.toggle-on').toggleClass('active');
 
-                    var willChangeEvent = jQuery.Event('willChange');
-                    obj.element.trigger(willChangeEvent);
-                    if(willChangeEvent.isDefaultPrevented()) {
-                        checked = obj.element.prop('checked');
-                    }
-                    else {
-                        var checked;
-                        if($[switchbutton].dragging) {
-                            var p = (x - $[switchbutton].dragStartPosition) / obj.rightSide;
-                            checked = (p < 0) ? Math.abs(p) < 0.5 : p >= 0.5;
-                        }
-                        else {
-                            checked = !obj.element.prop('checked');
-                        }
-                    }
+    // toggle the checkbox, if there is one
+    opts['checkbox'].prop('checked',active);
 
-                    $[switchbutton].currentlyClicking = null;
-                    $[switchbutton].dragging = null;
+    if (selectType) return;
 
-                    obj.element.prop('checked', checked);
-                    obj.$container.toggleClass('ui-state-active', checked);
-                    obj.element.change();
-                    obj.element.trigger('didChange');
-                });
+    var margin = active ? 0 : -width + height;
 
-            // Animate when we get a change event
-            this.element.change(function() {
-                obj.refresh();
+    // move the toggle!
+    inner.css('margin-left',margin);
 
-                var new_left = obj.element.prop('checked') ? obj.rightSide : 0;
-                
-                obj.$handle.animate({ 'left': new_left }, obj.options.duration);
-                obj.$enabledLabel.animate({ 'width': new_left }, obj.options.duration);
-                obj.$disabledSpan.animate({ 'margin-right': -new_left }, obj.options.duration);
-                obj.$enabledSpan.animate({ 'margin-left': new_left - obj.rightSide }, obj.options.duration);
-            });
-        },
-        
-        _globalEvents: function() {
-            if($[switchbutton].initComplete) {
-                return;
-            }
+    // ensure the toggle is left in the correct state after animation
+    setTimeout(function() {
+      inner.css(notransitions);
+      inner.css('margin-left',margin);
+    },opts['animate']);
 
-            var opt = this.options;
+  };
 
-            $(document)
-                // As the mouse moves on the page, animate if we are in a drag state
-                .bind('mousemove touchmove', function(event) {
-                    if(!$[switchbutton].currentlyClicking) { return; }
-                    event.preventDefault();
+  // start setting up the toggle(s)
+  return this.each(function() {
+    var toggle = $(this);
 
-                    var x = event.pageX || event.originalEvent.changedTouches[0].pageX;
-                    if(!$[switchbutton].dragging && (Math.abs($[switchbutton].dragStartPosition - x) > opt.dragThreshold)) { 
-                        $[switchbutton].dragging = true; 
-                    }
+    var height = toggle.height();
+    var width = toggle.width();
 
-                    $(event.target).trigger('iPhoneDrag', [x]);
-                })
-                
-                // When the mouse comes up, leave drag state
-                .bind('mouseup touchend', function(event) {
-                    if(!$[switchbutton].currentlyClicking) { return; }
-                    event.preventDefault();
-                    
-                    var x = event.pageX || event.originalEvent.changedTouches[0].pageX;
-                    $($[switchbutton].currentlyClicking).trigger('iPhoneDragEnd', [x]);
-                });
-        },
-        
-        _disableTextSelection: function() {
-            // Disable IE text selection, other browsers are handled in CSS
-            if (!$.browser.msie) { return; }
-            
-            // Elements containing text should be unselectable
-            $([this.$handle, this.$disabledLabel, this.$enabledLabel, this.$container]).attr('unselectable', 'on');
-        },
-            
-        _autoResize: function() {
-            var onLabelWidth    = this.$enabledLabel.width(),
-                offLabelWidth   = this.$disabledLabel.width(),
-                spanPadding     = this.$disabledSpan.innerWidth() - this.$disabledSpan.width()
-                handleMargins   = this.$handle.outerWidth() - this.$handle.innerWidth();
-            
-            var containerWidth = handleWidth = (onLabelWidth > offLabelWidth) ? onLabelWidth : offLabelWidth;
-            
-            this.$handle.css({ 'width': handleWidth });
-            handleWidth = this.$handle.width();
-            
-            containerWidth += handleWidth + 6;
-            spanWidth = containerWidth - handleWidth - spanPadding - handleMargins;
-            
-            this.$container.css({ 'width': containerWidth });
-            this.$container.find('span').width(spanWidth);
-        },
-        
-        _initialPosition: function() {
-            this.$disabledLabel.css({ width: this.$container.width() - 5 });
+    // if the element doesnt have an explicit height/width in css, set them
+    if (!height || !width) {
+      toggle.height(height = opts.height);
+      toggle.width(width = opts.width);
+    }
 
-            this.rightSide = this.$container.width() - this.$handle.outerWidth();
-            
-            if(this.element.prop('checked')) {
-                this.$handle.css({ 'left': this.rightSide });
-                this.$enabledLabel.css({ 'width': this.rightSide });
-                this.$disabledSpan.css({ 'margin-right': -this.rightSide });
-            }
-            else {
-                this.$enabledLabel.css({ 'width': 0 });
-                this.$enabledSpan.css({ 'margin-left': -this.rightSide });
-            }
-            
-            this.refresh();
-        },
-        
-        enable: function() {
-            this.element.prop('disabled', false);
-            this.refresh();
-            return this._setOption('disabled', false);
-        },
-        
-        disable: function() {
-            this.element.prop('disabled', true);
-            this.refresh();
-            return this._setOption('disabled', true);
-        },
-        
-        widget: function() {
-            return this.$container;
-        },
-        
-        refresh: function() {
-            if(this.element.prop('disabled')) {
-                this.$container.addClass(this.options.disabledClass);
-                return false;
-            }
-            else {
-                this.$container.removeClass(this.options.disabledClass);
-            }
-        }
-        
+    var div = '<div class="toggle-';
+    var slide = $(div+'slide">'); // wrapper inside toggle
+    var inner = $(div+'inner">'); // inside slide, this bit moves
+    var on = $(div+'on">'); // the on div
+    var off = $(div+'off">'); // off div
+    var blob = $(div+'blob">'); // the grip toggle blob
+
+    var halfheight = height/2;
+    var onoffwidth = width - halfheight;
+
+    // set up the CSS for the individual elements
+    on
+      .css({
+        height: height,
+        width: onoffwidth,
+        textAlign: 'center',
+        textIndent: selectType ? '' : -halfheight,
+        lineHeight: height+'px'
+      })
+      .html(opts['text']['on']);
+
+    off
+      .css({
+        height: height,
+        width: onoffwidth,
+        marginLeft: selectType ? '' : -halfheight,
+        textAlign: 'center',
+        textIndent: selectType ? '' : halfheight,
+        lineHeight: height+'px'
+      })
+      .html(opts['text']['off'])
+      .addClass('active');
+
+    blob.css({
+      height: height,
+      width: height,
+      marginLeft: -halfheight
     });
-    
-})(jQuery, 'switchbutton');
+
+    inner.css({
+      width: width * 2 - height,
+      marginLeft: selectType ? 0 : -width + height
+    });
+
+    if (selectType) {
+      slide.addClass('toggle-select');
+      toggle.css('width', onoffwidth*2);
+      blob.hide();
+    }
+
+    // construct the toggle
+    toggle.html(slide.html(inner.append(on,blob,off)));
+
+    // when toggle is fired, toggle the toggle
+    slide.on('toggle', function(e,active) {
+
+      // stop bubbling
+      if (e) e.stopPropagation();
+
+      doToggle(slide,width,height);
+      toggle.trigger('toggle',!active);
+    });
+
+    // setup events for toggling on or off
+    toggle.on('toggleOn', function() {
+      doToggle(slide, width, height, false);
+    });
+    toggle.on('toggleOff', function() {
+      doToggle(slide, width, height, true);
+    });
+
+    if (opts['on']) {
+
+      // toggle immediately to turn the toggle on
+      doToggle(slide,width,height);
+    }
+
+    // if click is enabled and toggle isn't within the clicker element (stops double binding)
+    if (opts['click'] && (!opts['clicker'] || !opts['clicker'].has(toggle).length)) {
+
+      // bind the click, ensuring its not the blob being clicked on
+      toggle.on('click',function(e) {
+        if (e.target !=  blob[0] || !opts['drag']) {
+          slide.trigger('toggle', slide.hasClass('active'));
+        }
+      });
+    }
+
+    // setup the clicker element
+    if (opts['clicker']) {
+      opts['clicker'].on('click',function(e) {
+        if (e.target !=  blob[0] || !opts['drag']) {
+          slide.trigger('toggle', slide.hasClass('active'));
+        }
+      });
+    }
+
+    // we're done with all the non dragging stuff
+    if (!opts['drag'] || selectType) return;
+
+    // time to begin the dragging parts/blob clicks
+    var diff;
+    var slideLimit = (width - height) / 4;
+
+    // fired on mouseup and mouseleave events
+    var upLeave = function(e) {
+      toggle.off('mousemove');
+      slide.off('mouseleave');
+      blob.off('mouseup');
+
+      var active = slide.hasClass('active');
+
+      if (!diff && opts.click && e.type !== 'mouseleave') {
+
+        // theres no diff so nothing has moved. only toggle if its a mouseup
+        slide.trigger('toggle', active);
+        return;
+      }
+
+      if (active) {
+
+        // if the movement enough to toggle?
+        if (diff < -slideLimit) {
+          slide.trigger('toggle',active);
+        } else {
+
+          // go back
+          inner.animate({
+            marginLeft: 0
+          },opts.animate/2);
+        }
+      } else {
+
+        // inactive
+        if (diff > slideLimit) {
+          slide.trigger('toggle',active);
+        } else {
+
+          // go back again
+          inner.animate({
+            marginLeft: -width + height
+          },opts.animate/2);
+        }
+      }
+
+    };
+
+    var wh = -width + height;
+
+    blob.on('mousedown', function(e) {
+
+      // reset diff
+      diff = 0;
+
+      blob.off('mouseup');
+      slide.off('mouseleave');
+      var cursor = e.pageX;
+
+      toggle.on('mousemove', blob, function(e) {
+        diff = e.pageX - cursor;
+        var marginLeft;
+        if (slide.hasClass('active')) {
+
+          marginLeft = diff;
+
+          // keep it within the limits
+          if (diff > 0) marginLeft = 0;
+          if (diff < wh) marginLeft = wh;
+        } else {
+
+          marginLeft = diff + wh;
+
+          if (diff < 0) marginLeft = wh;
+          if (diff > -wh) marginLeft = 0;
+
+        }
+
+        inner.css('margin-left',marginLeft);
+      });
+
+      blob.on('mouseup', upLeave);
+      slide.on('mouseleave', upLeave);
+    });
+
+
+  });
+
+};
