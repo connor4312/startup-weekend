@@ -90,7 +90,7 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-  
+</div>  
   <!-- ####################### BOARD -->
   <div id="board" class="pull-left">
       <div id="board-title" class="pull-left">
