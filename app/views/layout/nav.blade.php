@@ -29,7 +29,7 @@
                 @endif
               </ul>
             </li>
-            <li><a href="#"><i class="icon-plus-sign"></i> Create New Board</a></li>
+            <li><a href="{{ URL::to('/board') }}"><i class="icon-plus-sign"></i> Create New Board</a></li>
             <li>{{ HTML::link('/account/logout', 'Logout') }}</li>
           </ul>
           @else

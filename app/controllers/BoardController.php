@@ -41,7 +41,7 @@ class BoardController extends \BaseController {
 
 		$this->pushBoards();
 		
-		return Redirect::to('/board/' . $board->id);
+		return Redirect::to('/board/' . $board->key);
 	}
 
 	public function view($key) {
