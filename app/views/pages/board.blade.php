@@ -22,7 +22,7 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
-        <a data-toggle="modal" href="#image" class="btn btn-default btn-add"><i class="icon-picture"></i> Paste image URL</a>
+        <a data-toggle="modal" href="#image" class="btn btn-default btn-add"><i class="icon-cloud-upload"></i> Upload Image</a>
         <div class="modal fade" id="image" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
