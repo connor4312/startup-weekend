@@ -16,7 +16,7 @@ class BoardController extends \BaseController {
 	 * Shows the board view
 	 * @return \Illuminate\View\View
 	 */
-	public function addnew() {
+	public function create() {
 		return View::make('pages.board');
 	}
 
