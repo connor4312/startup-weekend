@@ -26,7 +26,7 @@ class ImgDribbble {
 		}
 
 		$curl = new \Curl;
-		$data = json_decode($curl->simple_get(Input::get('url')));
+		$data = $curl->simple_get(Input::get('url'));
 
 		preg_match('/dribbble\.s3\.amazonaws\.com\/users\/[0-9]+\/screenshots\/[0-9]+\/[0-9A-z_\-]+\.png/', $data, $matches);
 
