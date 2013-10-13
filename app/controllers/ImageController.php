@@ -14,13 +14,19 @@ class ImageController extends \BaseController {
 		'dribbbleBucket' => array(
 			'action' => 'Repos\ImgRemote@bucket',
 			'validation' => array(
-				'url' => 'required|regex:/^http:\/\/dribbble.com\/[A-z]+\/buckets\/.+$/'
+				'url' => 'required|url'
 			)
 		),
 		'dribbblePost' => array(
 			'action' => 'Repos\ImgRemote@shot',
 			'validation' => array(
-				'url' => 'required|regex:/^http:\/\/dribbble.com\/shots\/.+$/'
+				'url' => 'required|url'
+			)
+		),
+		'pintrest' => array(
+			'action' => 'Repos\ImgRemote@pintrest',
+			'validation' => array(
+				'url' => 'required|url'
 			)
 		),
 		'url' => array(

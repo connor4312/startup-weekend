@@ -58,6 +58,23 @@ class ImgRemote {
 		return array('success' => true, 'data' => $out);
 	}
 
+	public static function pintrest() {
+		if (!preg_match('/pinterest\.com\/[A-z0-9_\-]+\/[A-z0-9_\-]+/', Input::get('url'))) {
+			return array('success' => false, 'error' => 'Bad URL');
+		}
+
+		$curl = new \Curl;
+		$data = $curl->simple_get(Input::get('url'));
+		
+		preg_match_all('/\/\/media-cache-[a-z0-9]+\.pinimg\.com\/[0-9]+x\/[0-9a-z]+\/[0-9a-z]+\/[0-9a-z]+\/[0-9a-f]+\.jpg/', $data, $matches);
+
+		$out = array();
+		foreach ($matches[0] as $m) {
+			$out[] = self::grabFile('http://' . $m)['path'];
+		}
+		return array('success' => true, 'data' => $out);
+	}
+
 	private static function grabFile($url, $extension = null) {
 		$name = str_random(32);
 
