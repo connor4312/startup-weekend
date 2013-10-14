@@ -88,7 +88,7 @@ class ImageController extends \BaseController {
 		$extension = $this->getExtension($file);
 		$id = DB::table('aws')
 			->insertGetId(array(
-				'board_id' => Input::get('board'),
+				'board_id' => $this->board->id,
 				'extension' => $extension,
 				'created_at' => DB::raw('NOW()')
 			));
