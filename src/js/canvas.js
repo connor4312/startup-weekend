@@ -1,34 +1,85 @@
+/*
+	TODO: Probably allow users to specify items that are currently hardcoded.
+	TODO: Rename some variables/ids for consistency and readability.
+	TODO: Fix pinterest.
+	TODO: Select multiple elements?
+	TODO: Group layers?
+*/
 $(function () {
+	// summary:
+	//		Canvas object and related controls.
+	// container: Node
+	//		Main div on which the canvas will be initialized.
 	var container = $("#canvas"),
+		// height: Number
+		//		Number of pixels high that the canvas should be.
 		height = 1240,
+		// width: Number
+		//		Number of pixels wide that the canvas should be.
 		width = 960,
+		// paper: Raphael.Paper
+		//		SVG canvas (paper) on which the elements will be rendered.
 		paper = Raphael(container[0], width, height),
+		// colorHex: Node
+		//		Input in which the hexidecimal value of the desired color swatch will be placed.
 		colorHex = $("#colorHex"),
+		// imageUrl: Node
+		//		Input in which the URL value of the desired image to import will be placed.
 		imageUrl = $("#imageUrl"),
+		// pickerContainer: Node
+		//		Main container in which the color picker will be placed.
 		pickerContainer = $("#pickerContainer"),
+		// pickerCanvas: Node
+		//		SVG Canvas on which the color picker will be placed.
 		pickerCanvas = $("#pickerCanvas"),
+		// elements: Raphael.Element[]
+		//		Array of elements that have been added to the canvas.
 		elements = [],
+		// current: Raphael.Element
+		//		Element that is currently selected.  If no element is selected
+		//		this value will be `null`.
 		current = null,
+		// dribleUrl: Node
+		//		Input in which the URL value of the desired dribble bucket will be placed.
 		dribbleUrl = $("#js-dribbble-bucket-in"),
+		// pinterestUrl: Node
+		//		Input in which the URL value of the desired pinterest board will be placed.
 		pinterestUrl = $("#js-pin-in"),
+		// key: String
+		//		Board key.
+		// i: Number
+		// colorPicker: Raphael.ColorPicker
 		key, i, colorPicker;
 
 	paper.canvas.style.backgroundColor = "#f2f2f2";
 	key = document.getElementById("canvas").getAttribute("data-key");
 
 	function startDrag() {
+		// summary:
+		//		Function executed when the user performs the beginning of the dragging
+		//		of an element.
 		this.ox = this.attr("x");
 		this.oy = this.attr("y");
 	}
 
-	function move(dx, dy) {
+	function move(/*Number*/ dx, /*Number*/ dy) {
+		// summary:
+		//		Function executed as the user moves the element across the canvas.
+		// dx: Number
+		//		Delta change, in pixels, that the element has moved on the x-axis.
+		// dy: Number
+		//		Delta change, in pixels, that the element has moved on the y-axis.
 		var x = this.ox + dx,
 			y = this.oy + dy;
 
+		// Contain element at top most and left most areas of the canvas.
 		x = Math.min(width - this.attr("width") - 10, x);
-		x = Math.max(10, x);
 		y = Math.min(height - this.attr("height") - 10, y);
+
+		// Contain element at right most and bottom most areas of the canvas.
+		x = Math.max(10, x);
 		y = Math.max(10, y);
+
 		this.attr({
 			x: x,
 			y: y
@@ -42,11 +93,19 @@ $(function () {
 		}
 	}
 
-	function stopDrag(event) {
+	function stopDrag() {
+		// summary:
+		//		Function executed when the element has been dropped after dragging.
 		resetGlow(this, this.selected);
 	}
 
-	function resetGlow(element, selected) {
+	function resetGlow(/*Raphael.Element*/ element, /*Boolean*/ selected) {
+		// summary:
+		//		Removes an old glow and adds a new glow to an element.
+		// element: Raphael.Element
+		//		Element to which the glow should be added and removed.
+		// selected: Boolean
+		//		If the element is in a selected state.
 		if (element._glow) {
 			element._glow.remove();
 		}
@@ -56,8 +115,12 @@ $(function () {
 		});
 	}
 
-	function deselect(element) {
-		if (!element) {
+	function deselect(/*Raphael.Element*/ element) {
+		// summary:
+		//		Deselect an element.  Currently only deselects the 'current' selected element.
+		// element: Raphael.Element
+		//		Element that should be deselected.
+		if (!element || !element.selected) {
 			return;
 		}
 
@@ -66,14 +129,24 @@ $(function () {
 		current = null;
 	}
 
-	function select(element) {
+	function select(/*Raphael.Element*/ element) {
+		// summary:
+		//		Select an element.  Currently will deselect any currently selected element.
+		// element: Raphael.Element
+		//		Element that should be selected.
 		element.selected = true;
 		resetGlow(element, true);
 		current = element;
 	}
 
-	function moveCurrent(forward) {
+	function moveCurrent(/*Boolean*/ forward) {
+		// summary:
+		//		Moves the current element in either a forward or backward direction.
+		// forward: Boolean
+		//		If the element should be moved forward.
 		var index = current._index,
+			// Completely remove the `next` element, so that it can be repositioned in the
+			// `elements` array.
 			next = elements.splice(forward ? index + 1 : index - 1, 1)[0];
 
 		current._index = forward ? current._index + 1 : current._index - 1;
@@ -84,7 +157,13 @@ $(function () {
 		resetGlow(current, current.selected);
 	}
 
-	function moveCurrentBack(event) {
+	function moveCurrentBack(/*Event*/ event) {
+		// summary:
+		//		Move the currently selected element backwards.
+		// event: Event
+		//		Event object from the click.
+
+		// Since the move back element is an anchor with an href, we must prevent default.
 		event.preventDefault();
 		if (elements.length < 2 || !current || current._index === 0) {
 			return;
@@ -93,7 +172,13 @@ $(function () {
 		moveCurrent(false);
 	}
 
-	function moveCurrentForward() {
+	function moveCurrentForward(/*Event*/ event) {
+		// summary:
+		//		Move the currently selected element forwards.
+		// event: Event
+		//		Event object from the click.
+
+		// Since the move back element is an anchor with an href, we must prevent default.
 		event.preventDefault();
 		if (elements.length < 2 || !current || current._index === elements.length - 1) {
 			return;
@@ -102,11 +187,12 @@ $(function () {
 		moveCurrent(true);
 	}
 
-	$(paper.canvas).click(function () {
-		deselect(current);
-	});
-
-	function initializeElement(element) {
+	function initializeElement(/*Raphael.Element*/ element) {
+		// summary:
+		//		Initialize an element and attach appropriate event
+		//		listeners to it.
+		// element: Raphael.Element
+		//		Element to be initialized.
 		element._index = elements.length;
 
 		element.click(function (event) {
@@ -132,11 +218,13 @@ $(function () {
 		element.drag(move, startDrag, stopDrag);
 
 		elements.push(element);
-
-		console.log(element, element.attr("x"), element.attr("y"));
 	}
 
-	function addImage(response) {
+	function addImage(/*Object*/ response) {
+		// summary:
+		//		Adds an image to the canvas.
+		// response: Object
+		//		XMLHTTP request response or an object.
 		var data = response.data || response,
 			i = 0,
 			image, container, x, y;
@@ -167,6 +255,7 @@ $(function () {
 			initializeElement(container);
 		}
 
+		// Hide any modal that might be opened.
 		$("#image").modal("hide");
 		$("#imageupload").modal("hide");
 		$("#dribbble").modal("hide");
@@ -178,7 +267,10 @@ $(function () {
 		imageUrl.val("");
 	}
 
-	function save(event) {
+	function save(/*Event*/ event) {
+		// summary:
+		//		Saves the elements of the canvas, their position,
+		//		type, and size, etc.
 		var data = {
 				board: key
 			},
@@ -216,7 +308,11 @@ $(function () {
 		});
 	}
 
-	function onColorChange (item) {
+	function onColorChange (/*Raphael.ColorPicker*/ item) {
+		// summary:
+		//		Changes the color of the input that is linked to the
+		//		color picker.
+		// item: Raphael.ColorPicker
 		return function (clr) {
 			colorHex.val(clr.replace(/^#(.)\1(.)\2(.)\3$/, "#$1$2$3"));
 			item.color(clr);
@@ -227,7 +323,12 @@ $(function () {
 		};
 	}
 
-	function addColor(data) {
+	function addColor(/*Object?*/ data) {
+		// summary:
+		//		Adds a color swatch to the canvas.
+		// data: [optional] Object
+		//		Optional object containing information about
+		//		the swatch.
 		var y = parseInt(data.y) || 200,
 			x = parseInt(data.x) || 200,
 			hex = data.color || colorHex.val(),
@@ -258,7 +359,13 @@ $(function () {
 		}
 	}
 
-	function loadElements(data) {
+	function loadElements(/*Object[]*/ data) {
+		// summary:
+		//		Loads an array of element configuration objects
+		//		onto the canvas.
+		// data: Object[]
+		//		Array of objects containing information about the
+		//		element.
 		var i = 0,
 			element;
 
@@ -271,7 +378,13 @@ $(function () {
 		}
 	}
 
-	function fetchImage(url, type) {
+	function fetchImage(/*String*/ url, /*String*/ type) {
+		// summary:
+		//		Fetches an image of a provided type at a provided location.
+		// url: String
+		//		Location at which the image can be found.
+		// type: String
+		//		Type of image: url, pinterest, dribbleBucket
 		$.ajax({
 			url: "/api/image/upload?board=" + key + "&type=" + type + "&url=" + url,
 			method: "GET",
@@ -316,6 +429,7 @@ $(function () {
 			colorPicker.color("#eee");
 			colorHex.val("#eee");
 		}
+
 		pickerContainer.show();
 	});
 
@@ -339,6 +453,10 @@ $(function () {
 		event.preventDefault();
 		fetchImage(pinterestUrl.val(), "pinterest");
 		$(this).attr("disabled", true);;
+	});
+
+	$(paper.canvas).click(function () {
+		deselect(current);
 	});
 
 	$.ajax({
